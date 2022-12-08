@@ -17,7 +17,7 @@ lint_check:
   script:
     - cd /usr/local
     - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | sh
-    - arduino-lint /builds/Gadgets/arduino-ble-gadget --library-manager update
+    - arduino-lint /builds/MSO-SW/unified-prototyping-toolkit/upt-core --library-manager update
       
 cpp_check:
     stage: validate
