@@ -29,14 +29,37 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Arduino.h"
+#ifndef SENSIRION_UNIT_H
+#define SENSIRION_UNIT_H
 
-#ifndef SENSIRION_UPT_CORE_H
-#define SENSIRION_UPT_CORE_H
-
-#include "BLE_Protocol.h"
-#include "Quantity.h"
 #include "Signal_Type.h"
-#include "Unit.h"
+#include <string>
 
-#endif /* SENSIRION_UPT_CORE_H */
+std::string getUnitString(SignalType signalType) {
+  switch (signalType) {
+  case SignalType::TEMPERATURE_DEGREES_CELSIUS:
+    return "degC";
+  case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
+    return "%";
+  case SignalType::CO2_PARTS_PER_MILLION:
+    return "ppm";
+  case SignalType::HCHO_PARTS_PER_BILLION:
+    return "ppb";
+  case SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER:
+    return "μg/m3";
+  case SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER:
+    return "μg/m3";
+  case SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER:
+    return "μg/m3";
+  case SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER:
+    return "μg/m3";
+  case SignalType::VOC_INDEX:
+    return ""; // VOC index is a unit free measure
+  case SignalType::NOX_INDEX:
+    return ""; // NOX index is a unit free measure
+  default:
+    return "UNDEFINED";
+  }
+}
+
+#endif /* SENSIRION_UNIT_H */

@@ -29,55 +29,21 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "Arduino.h"
-#include "Sensirion_Quantity.h"
+#ifndef SIGNAL_TYPE_H
+#define SIGNAL_TYPE_H
 
-enum DataType {
-    T_RH_V3,
-    T_RH_V4,
-    T_RH_VOC,
-    T_RH_CO2,
-    T_RH_CO2_ALT,
-    T_RH_CO2_PM25,
-    T_RH_VOC_PM25,
-    T_RH_VOC_NOX,
-    T_RH_VOC_NOX_PM25,
-    T_RH_HCHO,
-    T_RH_CO2_VOC_PM25_HCHO,
-    T_RH_CO2_VOC_NOX_PM25,
-    T_RH_CO2_PM25_V2,
-    T_RH_VOC_PM25_V2,
-    T_RH_CO2_VOC_PM25_HCHO_V2,
-    PM10_PM25_PM40_PM100,
-    CO2_DataType
-    /* Add new DataType here. Don't forget to add corresponding
-    SampleConfig in Config.cpp */
+enum class SignalType {
+  UNDEFINED,
+  TEMPERATURE_DEGREES_CELSIUS,
+  RELATIVE_HUMIDITY_PERCENTAGE,
+  CO2_PARTS_PER_MILLION,
+  HCHO_PARTS_PER_BILLION,
+  PM1P0_MICRO_GRAMM_PER_CUBIC_METER,
+  PM2P5_MICRO_GRAMM_PER_CUBIC_METER,
+  PM4P0_MICRO_GRAMM_PER_CUBIC_METER,
+  PM10P0_MICRO_GRAMM_PER_CUBIC_METER,
+  VOC_INDEX,
+  NOX_INDEX
 };
 
-// Converter functions # uint16_t is an unsigned short int. 
-uint16_t convertSimple(float value);
-uint16_t convertTemperatureV1(float value);
-uint16_t convertHumidityV1(float value);
-uint16_t convertHumidityV2(float value);
-uint16_t convertPM2p5V1(float value);
-uint16_t convertPMV2(float value);
-uint16_t convertHCHOV1(float value);
-/* Declare new converter function here, define in Config.cpp */
-
-struct SampleSlot {
-    Unit unit;
-    size_t offset; // size_t is a long unsigned int
-    uint16_t (*converterFunction)(float value);
-};
-
-struct SampleConfig {
-    DataType dataType;
-    uint16_t downloadType;
-    uint8_t sampleType;
-    size_t sampleSizeBytes;
-    size_t sampleCountPerPacket;
-    uint8_t sensirionAdvertisementSampleType;
-    std::map<Unit, SampleSlot> sampleSlots;
-};
-
-extern std::map<DataType, SampleConfig> sampleConfigSelector;
+#endif /* SIGNAL_TYPE_H */

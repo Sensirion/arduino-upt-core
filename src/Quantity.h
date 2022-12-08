@@ -29,53 +29,37 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SENSIRION_UNIT_H
-#define SENSIRION_UNIT_H
+#ifndef QUANTITY_H
+#define QUANTITY_H
 
-#include "Sensirion_Quantity.h"
+#include "Signal_Type.h"
+#include <string>
 
-enum class Unit {
-    UNDEFINED,
-    DEGREES_CELSIUS,
-    RELATIVE_HUMIDITY_PERCENTAGE,
-    PARTS_PER_MILLION,
-    PARTS_PER_BILLION,
-    MICRO_GRAMM_PER_CUBIC_METER,
-    NONE
-};
-
-const std::string unitString[] = {
-    "UNDEFINED",   "degC",           "%RH",         "ppm",      "ppb",
-    "μg/m3", ""};
-
-std::string getUnitString(Unit unit) {
-    return unitString[static_cast<int>(unit)];
+std::string getQuantityString(SignalType signalType) {
+  switch (signalType) {
+  case SignalType::TEMPERATURE_DEGREES_CELSIUS:
+    return "T";
+  case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
+    return "RH";
+  case SignalType::CO2_PARTS_PER_MILLION:
+    return "CO2";
+  case SignalType::HCHO_PARTS_PER_BILLION:
+    return "HCHO";
+  case SignalType::PM1P0_MICRO_GRAMM_PER_CUBIC_METER:
+    return "PM1P0";
+  case SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER:
+    return "PM2P5";
+  case SignalType::PM4P0_MICRO_GRAMM_PER_CUBIC_METER:
+    return "PM4P0";
+  case SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER:
+    return "PM10P0";
+  case SignalType::VOC_INDEX:
+    return "VOC";
+  case SignalType::NOX_INDEX:
+    return "NOX";
+  default:
+    return "UNDEFINED";
+  }
 }
 
-Unit getDefaultUnit(Quantity quantity) {
-    switch(quantity) {
-        case Quantity::TEMPERATURE:
-            return Unit::DEGREES_CELSIUS;
-        case Quantity::HUMIDITY:
-            return Unit::RELATIVE_HUMIDITY_PERCENTAGE;
-        case Quantity::CO2:
-            return Unit::PARTS_PER_MILLION;
-        case Quantity::HCHO:
-            return Unit::PARTS_PER_BILLION;
-        case Quantity::PM1P0:
-            return Unit::MICRO_GRAMM_PER_CUBIC_METER;
-        case Quantity::PM2P5:
-            return Unit::MICRO_GRAMM_PER_CUBIC_METER;
-        case Quantity::PM4P0:
-            return Unit::MICRO_GRAMM_PER_CUBIC_METER;
-        case Quantity::PM10P0:
-            return Unit::MICRO_GRAMM_PER_CUBIC_METER;
-        case Quantity::VOC_INDEX:
-            return Unit::NONE;
-        default:
-            return Unit::UNDEFINED;
-    }
-}
-
-#endif /* SENSIRION_UNIT_H */
-
+#endif /* QUANTITY_H */
