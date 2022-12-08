@@ -35,4 +35,4 @@ compile_test:
     needs: []
     script:
         - arduino-cli update
-        - arduino-cli compile --warnings all --fqbn esp32:esp32:esp32 examples/Basic_Usage.ino
+        - arduino-cli compile --warnings all --fqbn esp32:esp32:esp32 examples/Basic_Usage
