@@ -10,14 +10,17 @@ style_check:
     - clang-format-7 -i src/*
     - git diff --exit-code
 
-lint_check:
-  stage: validate
-  image: sensirion/embedded-ci:2.2.0
-  tags: [linux, docker]
-  script:
-    - cd /usr/local
-    - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | sh
-    - arduino-lint /builds/MSO-SW/unified-prototyping-toolkit/upt-core --library-manager update
+# Note: lint check will only pass once the library is published on the 
+#       Arduino library manager (https://github.com/arduino/library-registry)
+
+# lint_check:
+#   stage: validate
+#   image: sensirion/embedded-ci:2.2.0
+#   tags: [linux, docker]
+#   script:
+#     - cd /usr/local
+#     - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | sh
+#     - arduino-lint /builds/MSO-SW/unified-prototyping-toolkit/upt-core --library-manager update
       
 cpp_check:
     stage: validate
