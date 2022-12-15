@@ -38,4 +38,6 @@ compile_test:
     needs: []
     script:
         - arduino-cli update
+        - mkdir -p /root/Arduino/libraries/
+        - ln -s $PWD ~/Arduino/libraries/
         - arduino-cli compile --warnings all --fqbn esp32:esp32:esp32 examples/Basic_Usage
