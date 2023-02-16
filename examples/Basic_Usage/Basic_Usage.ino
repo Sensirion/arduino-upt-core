@@ -8,17 +8,17 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
   Serial.print("quantity: ");
-  Serial.println(getQuantityString(testSignalType).c_str());
+  Serial.println(quantityOf(testSignalType).c_str());
   Serial.print("unit: ");
-  Serial.println(getUnitString(testSignalType).c_str());
+  Serial.println(unitOf(testSignalType).c_str());
 }
 
 void loop() {
-  Serial.print(getQuantityString(testSignalType).c_str());
+  Serial.print(quantityOf(testSignalType).c_str());
   Serial.print(" ");
   Serial.print(dummyValue);
   Serial.print(" ");
-  Serial.println(getUnitString(testSignalType).c_str());
+  Serial.println(unitOf(testSignalType).c_str());
 
   dummyValue += 1;
   dummyValue = dummyValue % 100;

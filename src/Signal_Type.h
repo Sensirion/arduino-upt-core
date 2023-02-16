@@ -32,6 +32,8 @@
 #ifndef SIGNAL_TYPE_H
 #define SIGNAL_TYPE_H
 
+#include <string>
+
 enum class SignalType {
   UNDEFINED,
   TEMPERATURE_DEGREES_CELSIUS,
@@ -45,5 +47,8 @@ enum class SignalType {
   VOC_INDEX,
   NOX_INDEX
 };
+
+std::string unitOf(SignalType signalType);
+std::string quantityOf(SignalType signalType);
 
 #endif /* SIGNAL_TYPE_H */
