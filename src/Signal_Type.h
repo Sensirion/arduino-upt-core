@@ -48,7 +48,23 @@ enum class SignalType {
   NOX_INDEX
 };
 
+/**
+ * @brief Get the unit of a SignalType.
+ *  The "unit" refers to the physical unit of a SignalType.
+ *  Note that signalsTypes may be unit-free.
+ *
+ * @return std::string
+ *  e.g. "degC" for TEMPERATURE_DEGREES_CELSIUS
+ */
 std::string unitOf(SignalType signalType);
+
+/**
+ * @brief Get the quantity of a SignalType.
+ *  The "quantity" refers to the name of a SignalType.
+ *
+ * @return std::string
+ *  e.g. "T" for TEMPERATURE_DEGREES_CELSIUS
+ */
 std::string quantityOf(SignalType signalType);
 
 #endif /* SIGNAL_TYPE_H */
