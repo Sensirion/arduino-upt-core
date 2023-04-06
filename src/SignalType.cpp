@@ -1,4 +1,4 @@
-#include "Signal_Type.h"
+#include "SignalType.h"
 
 std::string unitOf(SignalType signalType) {
     switch (signalType) {

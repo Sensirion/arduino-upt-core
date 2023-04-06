@@ -30,7 +30,7 @@
  */
 
 #include "Arduino.h"
-#include "Signal_Type.h"
+#include "SignalType.h"
 #include <map>
 
 enum DataType {

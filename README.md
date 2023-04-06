@@ -27,7 +27,7 @@ pio lib install Sensirion_Unified_Prototyping_Toolkit_Core
 ```
 3. Compile, Upload and view Serial output using the terminal:
 
-Note that theses commands must be called from the `Basic_Usage` directory, where the `platformio.ini` file resides.
+Note that theses commands must be called from the `BasicUsage` directory, where the `platformio.ini` file resides.
 ```bash
 pio run -t upload
 ```
