@@ -1,4 +1,4 @@
-#include "BLE_Protocol.h"
+#include "BLEProtocol.h"
 
 std::map<DataType, SampleConfig> sampleConfigSelector = {
     {T_RH_V3,

@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.1.1]
+### Added
+- Add monitor speed to platformio.ini
+- README instructions for getting starte
+
 ## [0.1.0]
 ### Added
 - Sensirion BLE Protocol
