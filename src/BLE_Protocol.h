@@ -34,25 +34,25 @@
 #include <map>
 
 enum DataType {
-  T_RH_V3,
-  T_RH_V4,
-  T_RH_VOC,
-  T_RH_CO2,
-  T_RH_CO2_ALT,
-  T_RH_CO2_PM25,
-  T_RH_VOC_PM25,
-  T_RH_VOC_NOX,
-  T_RH_VOC_NOX_PM25,
-  T_RH_HCHO,
-  T_RH_CO2_VOC_PM25_HCHO,
-  T_RH_CO2_VOC_NOX_PM25,
-  T_RH_CO2_PM25_V2,
-  T_RH_VOC_PM25_V2,
-  T_RH_CO2_VOC_PM25_HCHO_V2,
-  PM10_PM25_PM40_PM100,
-  CO2_DataType
-  /* Add new DataType here. Don't forget to add corresponding
-  SampleConfig in Config.cpp */
+    T_RH_V3,
+    T_RH_V4,
+    T_RH_VOC,
+    T_RH_CO2,
+    T_RH_CO2_ALT,
+    T_RH_CO2_PM25,
+    T_RH_VOC_PM25,
+    T_RH_VOC_NOX,
+    T_RH_VOC_NOX_PM25,
+    T_RH_HCHO,
+    T_RH_CO2_VOC_PM25_HCHO,
+    T_RH_CO2_VOC_NOX_PM25,
+    T_RH_CO2_PM25_V2,
+    T_RH_VOC_PM25_V2,
+    T_RH_CO2_VOC_PM25_HCHO_V2,
+    PM10_PM25_PM40_PM100,
+    CO2_DataType
+    /* Add new DataType here. Don't forget to add corresponding
+    SampleConfig in Config.cpp */
 };
 
 // Converter functions # uint16_t is an unsigned short int.
@@ -66,19 +66,19 @@ uint16_t convertHCHOV1(float value);
 /* Declare new converter function here, define in Config.cpp */
 
 struct SampleSlot {
-  SignalType signalType;
-  size_t offset; // size_t is a long unsigned int
-  uint16_t (*converterFunction)(float value);
+    SignalType signalType;
+    size_t offset; // size_t is a long unsigned int
+    uint16_t (*converterFunction)(float value);
 };
 
 struct SampleConfig {
-  DataType dataType;
-  uint16_t downloadType;
-  uint8_t sampleType;
-  size_t sampleSizeBytes;
-  size_t sampleCountPerPacket;
-  uint8_t sensirionAdvertisementSampleType;
-  std::map<SignalType, SampleSlot> sampleSlots;
+    DataType dataType;
+    uint16_t downloadType;
+    uint8_t sampleType;
+    size_t sampleSizeBytes;
+    size_t sampleCountPerPacket;
+    uint8_t sensirionAdvertisementSampleType;
+    std::map<SignalType, SampleSlot> sampleSlots;
 };
 
 extern std::map<DataType, SampleConfig> sampleConfigSelector;
