@@ -18,6 +18,8 @@ std::string unitOf(SignalType signalType) {
         return "μg/m3";
     case SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER:
         return "μg/m3";
+    case SignalType::VELOCITY_METERS_PER_SECOND:
+        return "m/s";
     case SignalType::VOC_INDEX:
         return ""; // VOC index is a unit free measure
     case SignalType::NOX_INDEX:
@@ -45,6 +47,8 @@ std::string quantityOf(SignalType signalType) {
         return "PM4P0";
     case SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER:
         return "PM10P0";
+    case SignalType::VELOCITY_METERS_PER_SECOND:
+        return "VELOCITY";
     case SignalType::VOC_INDEX:
         return "VOC";
     case SignalType::NOX_INDEX:

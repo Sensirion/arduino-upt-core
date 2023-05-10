@@ -50,7 +50,8 @@ enum DataType {
     T_RH_VOC_PM25_V2,
     T_RH_CO2_VOC_PM25_HCHO_V2,
     PM10_PM25_PM40_PM100,
-    CO2_DataType
+    CO2_DataType,
+    AV_T,
     /* Add new DataType here. Don't forget to add corresponding
     SampleConfig in Config.cpp */
 };
@@ -63,6 +64,7 @@ uint16_t convertHumidityV2(float value);
 uint16_t convertPM2p5V1(float value);
 uint16_t convertPMV2(float value);
 uint16_t convertHCHOV1(float value);
+uint16_t convertVelocityV1(float value);
 /* Declare new converter function here, define in Config.cpp */
 
 struct SampleSlot {
