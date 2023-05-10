@@ -384,7 +384,22 @@ std::map<DataType, SampleConfig> sampleConfigSelector = {
       .sampleSlots = {{SignalType::CO2_PARTS_PER_MILLION,
                        {.signalType = SignalType::CO2_PARTS_PER_MILLION,
                         .offset = 0,
-                        .converterFunction = &convertSimple}}}}}
+                        .converterFunction = &convertSimple}}}}},
+    {AV_T,
+     {.dataType = DataType::AV_T,
+      .downloadType = 37,
+      .sampleType = 38,
+      .sampleSizeBytes = 4,
+      .sampleCountPerPacket = 4,
+      .sensirionAdvertisementSampleType = 0,
+      .sampleSlots = {{SignalType::VELOCITY_METERS_PER_SECOND,
+                       {.signalType = SignalType::VELOCITY_METERS_PER_SECOND,
+                        .offset = 0,
+                        .converterFunction = &convertVelocityV1}},
+                      {SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                       {.signalType = SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                        .offset = 2,
+                        .converterFunction = &convertTemperatureV1}}}}}
     /* Add new SampleConfigs here */
 };
 
@@ -415,5 +430,9 @@ uint16_t convertPMV2(float value) {
 
 uint16_t convertHCHOV1(float value) {
     return static_cast<uint16_t>((value * 5) + 0.5f);
+}
+
+uint16_t convertVelocityV1(float value) {
+    return static_cast<uint16_t>((value / 1024) * 65535 + 0.5f);
 }
 /* Define new converter function here */
