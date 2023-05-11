@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.1.2]
+### Added
+- Velocity SignalType
+- AV_T DataType
+- CI lint check
+
 ## [0.1.1]
 ### Added
 - Add monitor speed to platformio.ini
