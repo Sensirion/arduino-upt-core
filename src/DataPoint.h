@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Sensirion AG
+ * Copyright (c) 2023, Sensirion AG
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,15 +28,22 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef DATA_POINT_H
+#define DATA_POINT_H
 
 #include "Arduino.h"
-
-#ifndef SENSIRION_UPT_CORE_H
-#define SENSIRION_UPT_CORE_H
-
-#include "BLEProtocol.h"
-#include "DataPoint.h"
-#include "SensorID.h"
 #include "SignalType.h"
 
-#endif /* SENSIRION_UPT_CORE_H */
+struct DataPoint {
+    SignalType signalType = SignalType::UNDEFINED;
+    float value = 0.0f;
+    unsigned long timeStamp = 0;
+    std::string sourceDevice = "UNDEFINED";
+    DataPoint() = default;
+    DataPoint(const SignalType &signalType_, const float &value_,
+              const unsigned long &timeStamp_, const std::string &sourceDevice_)
+        : signalType(signalType_), value(value_), timeStamp(timeStamp_),
+          sourceDevice(sourceDevice_) {}
+};
+
+#endif /* DATA_POINT_H */

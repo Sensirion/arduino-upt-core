@@ -28,6 +28,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef BLE_PROTOCOL_H
+#define BLE_PROTOCOL_H
 
 #include "Arduino.h"
 #include "SignalType.h"
@@ -84,3 +86,5 @@ struct SampleConfig {
 };
 
 extern std::map<DataType, SampleConfig> sampleConfigSelector;
+
+#endif /* BLE_PROTOCOL_H */

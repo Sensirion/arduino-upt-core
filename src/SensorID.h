@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022, Sensirion AG
+ * Copyright (c) 2023, Sensirion AG
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,15 +28,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
+#ifndef SENSOR_ID_H
+#define SENSOR_ID_H
 
-#include "Arduino.h"
+#include <string>
 
-#ifndef SENSIRION_UPT_CORE_H
-#define SENSIRION_UPT_CORE_H
+enum class SensorID { UNDEFINED, SCD4X, SEN44, SFA3X, SVM4X, SHT4X, SAV45 };
 
-#include "BLEProtocol.h"
-#include "DataPoint.h"
-#include "SensorID.h"
-#include "SignalType.h"
+std::string sensorName(SensorID sensorID);
 
-#endif /* SENSIRION_UPT_CORE_H */
+#endif /* SENSOR_ID_H */
