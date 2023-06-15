@@ -23,7 +23,7 @@ To test this library, you can run the `Basic_Usage` example in the `examples` fo
 1. To install the PlatformIO Core, follow the steps detailed [here](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html).
 2. Install the library using the terminal:
 ```bash
-pio lib install Sensirion_Unified_Prototyping_Toolkit_Core
+pio lib install Sensirion_UPT_Core
 ```
 3. Compile, Upload and view Serial output using the terminal:
 
