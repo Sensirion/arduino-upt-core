@@ -33,7 +33,19 @@
 
 #include <string>
 
-enum class SensorID { UNDEFINED, SCD4X, SEN44, SFA3X, SVM4X, SHT4X, SAV45 };
+enum class SensorID {
+    UNDEFINED,
+    SCD4X,
+    SEN44,
+    SFA3X,
+    SVM4X,
+    SHT4X,
+    SAV45,
+    SEN5X,
+    SCD30,
+    STC3X,
+    SGP41
+};
 
 std::string sensorName(SensorID sensorID);
 
