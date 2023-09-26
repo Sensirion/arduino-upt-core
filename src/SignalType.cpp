@@ -24,6 +24,8 @@ std::string unitOf(SignalType signalType) {
         return ""; // VOC index is a unit free measure
     case SignalType::NOX_INDEX:
         return ""; // NOX index is a unit free measure
+    case SignalType::GAS_CONCENTRATION:
+        return "%";
     default:
         return "UNDEFINED";
     }
@@ -53,6 +55,8 @@ std::string quantityOf(SignalType signalType) {
         return "VOC";
     case SignalType::NOX_INDEX:
         return "NOX";
+    case SignalType::GAS_CONCENTRATION:
+        return "Gas Conc.";
     default:
         return "UNDEFINED";
     }
