@@ -32,8 +32,6 @@
 #ifndef SIGNAL_TYPE_H
 #define SIGNAL_TYPE_H
 
-#include <string>
-
 enum class SignalType {
     UNDEFINED,
     TEMPERATURE_DEGREES_CELSIUS,
@@ -55,18 +53,18 @@ enum class SignalType {
  *  The "unit" refers to the physical unit of a SignalType.
  *  Note that signalsTypes may be unit-free.
  *
- * @return std::string
+ * @return const char*
  *  e.g. "degC" for TEMPERATURE_DEGREES_CELSIUS
  */
-std::string unitOf(SignalType signalType);
+const char *unitOf(SignalType signalType);
 
 /**
  * @brief Get the quantity of a SignalType.
  *  The "quantity" refers to the name of a SignalType.
  *
- * @return std::string
+ * @return const char*
  *  e.g. "T" for TEMPERATURE_DEGREES_CELSIUS
  */
-std::string quantityOf(SignalType signalType);
+const char *quantityOf(SignalType signalType);
 
 #endif /* SIGNAL_TYPE_H */

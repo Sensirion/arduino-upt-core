@@ -1,6 +1,6 @@
 #include "SensorID.h"
 
-std::string sensorName(SensorID sensorID) {
+const char *sensorName(SensorID sensorID) {
     switch (sensorID) {
     case SensorID::SCD4X:
         return "SCD4X";
