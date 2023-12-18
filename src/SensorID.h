@@ -31,8 +31,6 @@
 #ifndef SENSOR_ID_H
 #define SENSOR_ID_H
 
-#include <string>
-
 enum class SensorID {
     UNDEFINED,
     SCD4X,
@@ -47,6 +45,14 @@ enum class SensorID {
     SGP41
 };
 
-std::string sensorName(SensorID sensorID);
+/**
+ * @brief converts a SensorID to the corresponding sensor family name
+ *
+ * @param[in] SensorID of the sensor of interest
+ *
+ * @param [out] const char* name of the sensor family corresponding to the
+ * SensorID
+ */
+const char *sensorName(SensorID sensorID);
 
 #endif /* SENSOR_ID_H */

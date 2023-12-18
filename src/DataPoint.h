@@ -33,17 +33,19 @@
 
 #include "Arduino.h"
 #include "SignalType.h"
+#include <string.h>
 
 struct DataPoint {
     SignalType signalType = SignalType::UNDEFINED;
     float value = 0.0f;
     unsigned long timeStamp = 0;
-    std::string sourceDevice = "UNDEFINED";
-    DataPoint() = default;
+    char sourceDevice[10];
+    DataPoint() { strcpy(sourceDevice, "UNDEFINED"); }
     DataPoint(const SignalType &signalType_, const float &value_,
-              const unsigned long &timeStamp_, const std::string &sourceDevice_)
-        : signalType(signalType_), value(value_), timeStamp(timeStamp_),
-          sourceDevice(sourceDevice_) {}
+              const unsigned long &timeStamp_, const char *sourceDevice_)
+        : signalType(signalType_), value(value_), timeStamp(timeStamp_) {
+        strcpy(sourceDevice, sourceDevice_);
+    }
 };
 
 #endif /* DATA_POINT_H */

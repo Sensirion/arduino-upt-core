@@ -4,31 +4,33 @@
 DataPoint dummyDataPoint = {SignalType::RELATIVE_HUMIDITY_PERCENTAGE, 0, 0,
                             sensorName(SensorID::SHT4X)};
 
+DataPoint randomDataPoint();
+
 void setup() {
     Serial.begin(115200);
     Serial.println();
     delay(1000);
-    Serial.print("Sensor: ");
-    // Serial doesn't know std::string objects, so they have to converted
-    // to C style strings using c_str()
-    Serial.println(dummyDataPoint.sourceDevice.c_str());
-    Serial.print("quantity: ");
-    Serial.println(quantityOf(dummyDataPoint.signalType).c_str());
-    Serial.print("unit: ");
-    Serial.println(unitOf(dummyDataPoint.signalType).c_str());
-    Serial.println();
+
+    Serial.println("\n--------------------------------------\n");    
+
+    Serial.printf("Sensor: %s\nquantity: %s\nunit: %s\n",
+                  dummyDataPoint.sourceDevice,
+                  quantityOf(dummyDataPoint.signalType),
+                  unitOf(dummyDataPoint.signalType));
+    
+    Serial.println("\n--------------------------------------\n");    
 }
 
 void loop() {
-    Serial.print(quantityOf(dummyDataPoint.signalType).c_str());
-    Serial.print(": ");
-    Serial.print(dummyDataPoint.value);
-    Serial.print(unitOf(dummyDataPoint.signalType).c_str());
-    Serial.print(", @");
-    Serial.println(dummyDataPoint.timeStamp);
-    dummyDataPoint.value += 1;
-    dummyDataPoint.value =
-        static_cast<float>(static_cast<int>(dummyDataPoint.value) % 100);
-    dummyDataPoint.timeStamp = millis();
     delay(1000); // 1 second
+    dummyDataPoint = randomDataPoint();
+    Serial.printf("%s measured %s: %.2f\t@%lu\n", dummyDataPoint.sourceDevice,
+                  quantityOf(dummyDataPoint.signalType), dummyDataPoint.value,
+                  dummyDataPoint.timeStamp);
+}
+
+DataPoint randomDataPoint() {
+    return DataPoint(static_cast<SignalType>(random(1, 13)),
+                     0.01 * static_cast<float>(random(10000)), millis(),
+                     sensorName(static_cast<SensorID>(random(1, 11))));
 }

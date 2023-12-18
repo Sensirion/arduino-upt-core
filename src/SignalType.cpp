@@ -1,6 +1,6 @@
 #include "SignalType.h"
 
-std::string unitOf(SignalType signalType) {
+const char *unitOf(SignalType signalType) {
     switch (signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
         return "degC";
@@ -31,7 +31,7 @@ std::string unitOf(SignalType signalType) {
     }
 }
 
-std::string quantityOf(SignalType signalType) {
+const char *quantityOf(SignalType signalType) {
     switch (signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
         return "T";
@@ -56,7 +56,7 @@ std::string quantityOf(SignalType signalType) {
     case SignalType::NOX_INDEX:
         return "NOX";
     case SignalType::GAS_CONCENTRATION:
-        return "Gas Conc.";
+        return "GAS CONC.";
     default:
         return "UNDEFINED";
     }
