@@ -27,10 +27,15 @@ pio lib install Sensirion_UPT_Core
 ```
 3. Compile, Upload and view Serial output using the terminal:
 
-Note that theses commands must be called from the `BasicUsage` directory, where the `platformio.ini` file resides.
+As of November '23, platformio cannot compile ```.ino``` files if they're in a subdirectory of the project directory. Thus, first copy (or move) the example ```.ino``` file to a ```.cpp``` file:
+```bash
+cp examples/BasicUsage/BasicUsage.ino examples/BasicUsage/BasicUsage.cpp
+```
+Next, compile and upload the example:
 ```bash
 pio run -t upload
 ```
+Finally, monitor the board's output:
 ```bash
 pio device monitor -b 115200
 ```

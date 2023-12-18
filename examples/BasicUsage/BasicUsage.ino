@@ -24,13 +24,13 @@ void setup() {
 void loop() {
     delay(1000); // 1 second
     dummyDataPoint = randomDataPoint();
-    Serial.printf("%s measured %s: %.2f\t@%i\n", dummyDataPoint.sourceDevice,
+    Serial.printf("%s measured %s: %.2f\t@%lu\n", dummyDataPoint.sourceDevice,
                   quantityOf(dummyDataPoint.signalType), dummyDataPoint.value,
                   dummyDataPoint.timeStamp);
 }
 
 DataPoint randomDataPoint() {
     return DataPoint(static_cast<SignalType>(random(1, 13)),
-                     0.01 * static_cast<float>(random(1000)), millis(),
+                     0.01 * static_cast<float>(random(10000)), millis(),
                      sensorName(static_cast<SensorID>(random(1, 11))));
 }
