@@ -39,12 +39,12 @@ struct DataPoint {
     SignalType signalType = SignalType::UNDEFINED;
     float value = 0.0f;
     unsigned long timeStamp = 0;
-    char sourceDevice[10];
-    DataPoint() { strcpy(sourceDevice, "UNDEFINED"); }
+    char sourceDevice[16];
+    DataPoint() { strncpy(sourceDevice, "UNDEFINED", 15); }
     DataPoint(const SignalType &signalType_, const float &value_,
               const unsigned long &timeStamp_, const char *sourceDevice_)
         : signalType(signalType_), value(value_), timeStamp(timeStamp_) {
-        strcpy(sourceDevice, sourceDevice_);
+        strncpy(sourceDevice, sourceDevice_, 15);
     }
 };
 
