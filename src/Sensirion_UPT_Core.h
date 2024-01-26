@@ -35,8 +35,6 @@
 #define SENSIRION_UPT_CORE_H
 
 #include "BLEProtocol.h"
-#include "DataPoint.h"
-#include "SensorID.h"
-#include "SignalType.h"
+#include "Measurement.h"
 
 #endif /* SENSIRION_UPT_CORE_H */

@@ -28,10 +28,10 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef SENSOR_ID_H
-#define SENSOR_ID_H
+#ifndef SENSOR_TYPE_H
+#define SENSOR_TYPE_H
 
-enum class SensorID {
+enum class SensorType {
     UNDEFINED,
     SCD4X,
     SEN44,
@@ -46,13 +46,8 @@ enum class SensorID {
 };
 
 /**
- * @brief converts a SensorID to the corresponding sensor family name
- *
- * @param[in] SensorID of the sensor of interest
- *
- * @param [out] const char* name of the sensor family corresponding to the
- * SensorID
+ * @brief obtain a label for the sensor type, eg. "SCD4X"
  */
-const char *sensorName(SensorID sensorID);
+const char *sensorLabel(SensorType sensorType);
 
-#endif /* SENSOR_ID_H */
+#endif /* SENSOR_TYPE_H */
