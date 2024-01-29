@@ -43,7 +43,7 @@ Measurement createRandomMeasurement() {
         }
         measurement.metadata.deviceID = deviceID;
         measurement.metadata.devicetype.sensorType =
-            static_cast<SensorType>(random(1, 11));
+            static_cast<SensorType>(random(1, 16));
     } else { // BLE Gadget
         measurement.metadata.platform = DevicePlatform::BLE;
         uint64_t deviceID = 0;
