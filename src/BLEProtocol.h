@@ -86,13 +86,27 @@ uint16_t encodeVelocityV1(float value);
 /* Declare new encoding function here, define in
  * BLEProtocol.cpp */
 
-void emplaceRawValue(std::string &manufacturerData, uint8_t offset,
-                     uint16_t rawValue);
+// Decoding functions
+float decodeSimple(uint16_t rawValue);
+float decodeTemperatureV1(uint16_t rawValue);
+float decodeHumidityV1(uint16_t rawValue);
+float decodeHumidityV2(uint16_t rawValue);
+float decodePM2p5V1(uint16_t rawValue);
+float decodePMV2(uint16_t rawValue);
+float decodeHCHOV1(uint16_t rawValue);
+float decodeVelocityV1(uint16_t rawValue);
+/* Declare new decoding function here, define in
+ * BLEProtocol.cpp */
+
+// Data manipulators
+void emplaceRawValue(std::string &data, uint8_t offset, uint16_t rawValue);
+uint16_t getRawValue(const std::string &data, uint8_t offset);
 
 struct SampleSlot {
     SignalType signalType;
     size_t offset;
     uint16_t (*encodingFunction)(float value);
+    float (*decodingFunction)(uint16_t rawValue);
 };
 
 // Sample configuration data
@@ -105,6 +119,8 @@ struct SampleConfig {
     uint8_t sensirionAdvertisementSampleType;
     std::map<SignalType, SampleSlot> sampleSlots;
 };
+
+DataType getDataTypeFromSampleType(uint8_t sampleType);
 
 extern std::map<DataType, SampleConfig> sampleConfigSelector;
 
