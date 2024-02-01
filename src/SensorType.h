@@ -28,31 +28,33 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef SENSOR_ID_H
-#define SENSOR_ID_H
+#ifndef SENSOR_TYPE_H
+#define SENSOR_TYPE_H
 
-enum class SensorID {
+/* X stands for any sensor version in a family, ie. SHT4X can be assigned to any
+ * sensor in Sensirion's SHT4 series of sensors. */
+enum class SensorType {
     UNDEFINED,
     SCD4X,
-    SEN44,
     SFA3X,
     SVM4X,
+    SVM41,
     SHT4X,
     SAV45,
     SEN5X,
+    SEN50,
+    SEN54,
+    SEN55,
     SCD30,
     STC3X,
+    STC31,
+    SGP4X,
     SGP41
 };
 
 /**
- * @brief converts a SensorID to the corresponding sensor family name
- *
- * @param[in] SensorID of the sensor of interest
- *
- * @param [out] const char* name of the sensor family corresponding to the
- * SensorID
+ * @brief obtain a label for the sensor type, eg. "SCD4X"
  */
-const char *sensorName(SensorID sensorID);
+const char *sensorLabel(SensorType sensorType);
 
-#endif /* SENSOR_ID_H */
+#endif /* SENSOR_TYPE_H */
