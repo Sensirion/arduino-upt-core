@@ -10,14 +10,14 @@ There shouldn't be a reason to use it directly, but it is being used to create l
 Goal of this library is to provide a uniform design language across all UPT modules when handling sensor data, for convenient flow of information and preserving metadata.
 
 Fundamentally, a data point in the UPT ecosystem comes from one of two sources:
-* Wired: signal readings retrieved via eg. i2c communication
+* Wired: signal readings retrieved via a wired communications bus, eg. i2c communication
 * Bluetooth Low Energy (BLE): signal readings transimtted via BLE
        advertisement from a Sensirion demo device
 
 Unfortunately, further classification of a data point's origin is tricky:
-* The sensor authoring a measurement is not transmitted via BLE, it is thus
-       for example not possible to distinguish between Temperature readings from
-       SCD4X or SHT4X if received via BLE
+* The information about the sensor authoring a measurement is not transmitted via BLE, 
+    it is thus in general not possible to assign a ```SensorType``` to each ```DataPoint```
+    received via BLE.
 * Not all wired sensors support exact sensor classification. For example,
        while we know that a sensor responding to i2c commands on address ```0x62```
        belongs in the SCD4X family of sensors, we have no way of knowing if it
