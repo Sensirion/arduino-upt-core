@@ -4,14 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.0]
-This is a breaking version, most APIs were reworked during this revision.
+## [0.3.0] - Breaking Changes
+### Added
+- Additional SensorTypes for all detectable sensor versions
+- BLEGadgetType enum for Sensirion BLE Gadgets
+
 ### Modified
-- Renamed SensorID -> SensorType
-- Introduced additional SensorTypes (for all detectable sensor versions)
-- Introduced BLEGadgetType (for all detectable Sensirion BLE Gadgets)
-- Replaced DataPoint by a more refined and comprehensive object, Measurement
-- Replaced library examples
+- Renamed SensorID to SensorType
+- Replaced DataPoint with a more comprehensive Measurement object
+- Updated library examples
+- Updated library APIs
 
 ## [0.2.0]
 ### Modified
