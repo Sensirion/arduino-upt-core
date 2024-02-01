@@ -8,10 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 This is a breaking version, most APIs were reworked during this revision.
 ### Modified
 - Renamed SensorID -> SensorType
-- Introduced additional SensorTypes (for all detecable sensor versions)
-- Introduced BLEGadgetType
+- Introduced additional SensorTypes (for all detectable sensor versions)
+- Introduced BLEGadgetType (for all detectable Sensirion BLE Gadgets)
 - Replaced DataPoint by a more refined and comprehensive object, Measurement
-- Replaced library example
+- Replaced library examples
 
 ## [0.2.0]
 ### Modified
