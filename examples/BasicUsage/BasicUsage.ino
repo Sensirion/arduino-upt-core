@@ -53,7 +53,7 @@ Measurement createRandomMeasurement() {
         }
         measurement.metadata.deviceID = deviceID;
         measurement.metadata.devicetype.bleGadgetType =
-            static_cast<BLEGadgetType>(random(1, 4));
+            static_cast<BLEGadgetType>(random(1, 7));
     }
 
     // SignalType

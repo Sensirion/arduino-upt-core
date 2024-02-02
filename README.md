@@ -3,36 +3,6 @@
 A library containing all the relevant types and definitions shared between components of the Unified Prototyping Toolkit (UPT) for ease of maintainability.
 There shouldn't be a reason to use it directly, but it is being used to create libraries compatible with the rest of the UPT.
 
-## Getting started
-
-To test this library, you can run the `BasicUsage` example in the `examples` folder. For this you can use the Arduino IDE or PlatformIO. If you are on a Unix System, it is highly recommend to use the PlatformIO CLI as it way more straight forward to set up.
-
-### Arduino
-
-1. Download [Arduino IDE](http://www.arduino.cc/en/main/software) and setup the environment for ESP32 platform
-	* Follow [this guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html)
-	* Detailed Instructions for advanced users: [Arduino-ESP32](https://github.com/espressif/arduino-esp32)
-2. Start the Arduino IDE and open the Library Manager by selecting `Sketch` -> `Include Library` -> `Manage Libraries...`. Search for the `Sensirion_Unified_Prototyping_Toolkit_Core` library in the `Filter your search...` field and install it by clicking the `install` button.
-3. Connect your ESP32 DevKit to your computer.
-4. In the Arduino IDE, make sure you have the `ESP32 Dev Module` and the correct Port selected.
-5. Select `File` -> `Examples` -> `Sensirion Gadget BLE Lib` -> **`Basic_Usage`**.
-6. Connect your board and click the upload button.
-
-### PlatformIO
-
-1. To install the PlatformIO Core, follow the steps detailed [here](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html).
-2. Install the library using the terminal:
-```bash
-pio lib install Sensirion_UPT_Core
-```
-3. After you've conected your board, Compile, Upload and view Serial output using the terminal:
-```bash
-pio run -t upload && pio device monitor
-```
-As of November '23, platformio cannot compile ```.ino``` files if they're in a subdirectory of the project directory. Thus, the example ```.ino``` file is copied to a ```.cpp``` file during the build process.
-
-The example script will now display mock sensor measurements in the console.
-
 ## Philosophy behind this library
 
 ### Introduction:
@@ -118,10 +88,81 @@ MetaData(
     DeviceType = SensorType::SCD4X;
 );
 ```
+Please refer to the ```BasicUsage.ino``` script for a featured example on how to use the ```Measurement``` struct.
 
 ### Bluetooth Protocol
 Sensirion BLE Gadgets send their measurements encoded in their device advertisements,
 one way to enable data transmission without needing to establish a connection to the device.
-Utility functions used to retrieve the measurements from advertisements are also contained in
-this library, but we won't go over their use in this example. Pleaser refer to [this guide](https://github.com/Sensirion/arduino-ble-gadget/blob/master/documents/00-Sensirion_BLE_communication_protocol.pdf)
-for further information on how Sensirion BLE Gadgets broadcast their data.
+This encoding depends on the data being transmitted (to ensure the receiver knows how to interpret the data),
+and can be queried in a dictionary (implemented as a ```std::map```) provided by this library.
+
+#### SampleType and DataType
+These two identifiers (```SampleType``` is a ```uint8_t``` and ```DataType``` an ```enum```) serve as the main ways to
+identify (1) the shape of the transmission message, and (2) the nature of the contents therein. The device sending the advertisement (such as an Arduino board running [Sensirion's BLE DIY Gadget software](https://github.com/Sensirion/arduino-ble-gadget)) typically knows what signals it wants to send (and therefore selects an appropriate ```DataType```), while the receiving device reads the ```SignalType``` field in the ```ManufacturerData``` part of the BLE Advertisement message and maps it to the corresponding ```DataType```.
+
+For example, a [Sensirion MyCO<sub>2</sub> Gadget](https://sensirion.com/products/catalog/SCD4x-CO2-Gadget/) sends an advertisement identified by ```DataType::T_RH_CO2_ALT``` and  ```SignalType = 8```, and containing the temperature, relative humidity and CO<sub>2</sub> concentration measured by the device.
+
+Please refer to the [Sensirion BLE Communication Protocol](https://github.com/Sensirion/arduino-ble-gadget/blob/master/documents/00-Sensirion_BLE_communication_protocol.pdf) for a list of available ```SignalType```s and for the structure of a Sensirion BLE Advertisement.
+
+#### SampleConfig
+Once the ```DataType``` of the message is determined, it can be used to query configuration information of the message, such as it size and signals it contains, using the provided ```sampleConfigSelector``` dictionary provided:
+```cpp
+SampleConfig sampleConfig = sampleConfigSelector[myDataType];
+```
+```SampleConfig``` contains the following fields, among others:
+* ```SampleConfig.sampleSizeBytes```: useful for determining the size of the Advertisement message
+* ```SampleConfig.sampleSlots```: a dictionary mapping the slots to ```SignalType```.
+
+To pick up on the MyCO<sub>2</sub> Gadget, the corresponding ```sampleSizeBytes``` reads ```6``` (the 3 signal values transmitted get 2 bytes each), while the ```sampleSlots``` informs us of the order of the signals, the aforementioned Temperature, Relative Humidity, and CO<sub>2</sub> concentration.
+
+#### En/De-coding functions
+The signals are transmitted as ```uint16_t```. To ensure no information is lost, encoding and decoding functions are provided. Since these are not uniform (being both signal and ```DataType``` dependant), ```sampleSlots``` also provides
+pointers to the appropriate conversion functions.
+
+Please refer to the ```BLE_example.ino``` script for a featured example on how to encode/decode sensor data in a BLE Advertisement message.
+
+## Library example scripts
+Two example scripts are provided:
+* ```BasicUsage```: An example showing how to use the ```Measurement``` struct to handle sensor data in general;
+* ```BLE_example```: An example showing how to encode/decode senor data for transmission via BLE Advertisement. Note that the example does not actually use Bluetooth, so it can be run on a board that does not have an antenna.
+
+On PlatformIO, the examples can be run by by executing the following command from the library's root directory (containing this README):
+* For example ```BasicUsage```: ```$ pio run -t upload``` or ```$ pio run -e basicUsage -t upload``` (environment BasicUsage is default)
+* For example ```BLE_example```: ```pio run -e ble_example -t upload```
+
+In both cases, the output can be monitored by using the PlatformIO device monitor:
+```bash
+pio device monitor
+```
+
+Arduino IDE users can navigate to `File` -> `Examples` -> `Sensirion Gadget BLE Lib` -> **`BasicUsage`** or **`BLE_example`**, and click the upload button. The example outputs can be examined using the serial monitor (make sure to use ```115200 baud```).
+
+## How to install
+### Requirements
+This library requires standard library compatibility. Some boards such as Arduino AVR Uno do not ship with this functionnality. This library was developed and tested on Espressif ESP32 boards.
+
+### Arduino
+
+1. Download [Arduino IDE](http://www.arduino.cc/en/main/software) and setup the environment for ESP32 platform
+	* Follow [this guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html)
+	* Detailed Instructions for advanced users: [Arduino-ESP32](https://github.com/espressif/arduino-esp32)
+2. Start the Arduino IDE and open the Library Manager by selecting `Sketch` -> `Include Library` -> `Manage Libraries...`. Search for the `Sensirion_Unified_Prototyping_Toolkit_Core` library in the `Filter your search...` field and install it by clicking the `install` button.
+3. Connect your ESP32 DevKit to your computer.
+4. In the Arduino IDE, make sure you have the `ESP32 Dev Module` and the correct Port selected.
+5. Select `File` -> `Examples` -> `Sensirion Gadget BLE Lib` -> **`BasicUsage`**.
+6. Connect your board and click the upload button.
+
+### PlatformIO
+
+1. To install the PlatformIO Core, follow the steps detailed [here](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html).
+2. Install the library using the terminal:
+```bash
+pio lib install Sensirion_UPT_Core
+```
+3. After you've conected your board, Compile, Upload and view Serial output using the terminal:
+```bash
+pio run -t upload && pio device monitor
+```
+As of November '23, platformio cannot compile ```.ino``` files if they're in a subdirectory of the project directory. Thus, the example ```.ino``` file is copied to a ```.cpp``` file during the build process.
+
+The example script will now display mock sensor measurements in the console.
