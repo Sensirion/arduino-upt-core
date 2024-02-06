@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Additional SensorTypes for all detectable sensor versions
 - BLEGadgetType enum for Sensirion BLE Gadgets
+- Raw VOC and NOX signal types
 
 ### Modified
 - Renamed SensorID to SensorType

@@ -32,6 +32,11 @@
 #ifndef SIGNAL_TYPE_H
 #define SIGNAL_TYPE_H
 
+/**
+ * @note RAW VOC and NOX values must be converted to index scale to have any
+ * meaning. This is achieved with the Sensirion Gas Index Algorithm: see
+ * https://github.com/Sensirion/gas-index-algorithm
+ */
 enum class SignalType {
     UNDEFINED,
     TEMPERATURE_DEGREES_CELSIUS,
@@ -42,6 +47,8 @@ enum class SignalType {
     PM2P5_MICRO_GRAMM_PER_CUBIC_METER,
     PM4P0_MICRO_GRAMM_PER_CUBIC_METER,
     PM10P0_MICRO_GRAMM_PER_CUBIC_METER,
+    RAW_VOC_INDEX,
+    RAW_NOX_INDEX,
     VOC_INDEX,
     NOX_INDEX,
     VELOCITY_METERS_PER_SECOND,
