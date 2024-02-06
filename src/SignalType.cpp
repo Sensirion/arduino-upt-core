@@ -20,6 +20,10 @@ const char *unitOf(SignalType signalType) {
         return "μg/m3";
     case SignalType::VELOCITY_METERS_PER_SECOND:
         return "m/s";
+    case SignalType::RAW_VOC_INDEX:
+        return "n/a";
+    case SignalType::RAW_NOX_INDEX:
+        return "n/a";
     case SignalType::VOC_INDEX:
         return ""; // VOC index is a unit free measure
     case SignalType::NOX_INDEX:
@@ -51,10 +55,14 @@ const char *quantityOf(SignalType signalType) {
         return "PM10P0";
     case SignalType::VELOCITY_METERS_PER_SECOND:
         return "VELOCITY";
+    case SignalType::RAW_VOC_INDEX:
+        return "RAW VOC";
+    case SignalType::RAW_NOX_INDEX:
+        return "RAW NOX";
     case SignalType::VOC_INDEX:
-        return "VOC";
+        return "VOC INDEX";
     case SignalType::NOX_INDEX:
-        return "NOX";
+        return "NOX INDEX";
     case SignalType::GAS_CONCENTRATION:
         return "GAS CONC.";
     default:
