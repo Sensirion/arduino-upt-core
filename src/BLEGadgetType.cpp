@@ -12,6 +12,7 @@ const char *bleGadgetLabel(BLEGadgetType bleGadgetType) {
     case BLEGadgetType::SHT43_GADGET:
         return "SHT43-DB";
     case BLEGadgetType::BLE_DIY_GADGET:
+        return "DIY Gadget";
     case BLEGadgetType::HUMI_GADGET:
         return "n/a";
     default:
@@ -26,13 +27,13 @@ bleGadgetTypeFromCompleteLocalName(const char *completeLocalName) {
         return BLEGadgetType::AQ_MINION;
     } else if (strncmp(completeLocalName, "MyCO2", inBufSize) == 0) {
         return BLEGadgetType::MYCO2;
+    } else if (strncmp(completeLocalName, "sensi", inBufSize) == 0 ||
+               strncmp(completeLocalName, "S", inBufSize) == 0) {
+        return BLEGadgetType::BLE_DIY_GADGET;
     } else if (strncmp(completeLocalName, "SHT40 Gadget", inBufSize) == 0) {
         return BLEGadgetType::SHT40_GADGET;
     } else if (strncmp(completeLocalName, "SHT43 DB", inBufSize) == 0) {
         return BLEGadgetType::SHT43_GADGET;
-    } else if (strncmp(completeLocalName, "sensi", inBufSize) == 0 ||
-               strncmp(completeLocalName, "S", inBufSize) == 0) {
-        return BLEGadgetType::BLE_DIY_GADGET;
     } else if (strncmp(completeLocalName, "Smart Humigadget", inBufSize) == 0) {
         return BLEGadgetType::HUMI_GADGET;
     } else {
