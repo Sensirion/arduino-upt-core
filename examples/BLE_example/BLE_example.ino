@@ -128,12 +128,12 @@ void decodeAndPrintBLEAdvertisement(const std::string &data) {
     for (auto it = sampleConfig.sampleSlots.begin();
          it != sampleConfig.sampleSlots.end(); it++) {
         Measurement measurement;
-        measurement.signaltype = it->first;
+        measurement.signalType = it->first;
 
-        measurement.datapoint.t_offset = millis();
+        measurement.dataPoint.t_offset = millis();
         uint16_t rawValue = it->second.decodingFunction(
             getRawValue(data, 6 + it->second.offset));
-        measurement.datapoint.value = static_cast<float>(rawValue);
+        measurement.dataPoint.value = static_cast<float>(rawValue);
 
         printMeasurement(measurement);
     }
@@ -142,29 +142,29 @@ void decodeAndPrintBLEAdvertisement(const std::string &data) {
 void printMeasurement(const Measurement &measurement) {
     // Get device and platform description
     const char *platformDescr = devicePlatformLabel(
-        measurement.metadata.platform, measurement.metadata.devicetype);
-    const char *deviceDescr = deviceLabel(measurement.metadata.platform,
-                                          measurement.metadata.devicetype);
+        measurement.metaData.platform, measurement.metaData.deviceType);
+    const char *deviceDescr = deviceLabel(measurement.metaData.platform,
+                                          measurement.metaData.deviceType);
 
     // Get deviceID in string representation
     char deviceIDDescr[64];
-    if (measurement.metadata.platform == DevicePlatform::BLE) {
-        sprintf(deviceIDDescr, "0x%llx", measurement.metadata.deviceID);
+    if (measurement.metaData.platform == DevicePlatform::BLE) {
+        sprintf(deviceIDDescr, "0x%llx", measurement.metaData.deviceID);
     } else {
-        sprintf(deviceIDDescr, "%llu", measurement.metadata.deviceID);
+        sprintf(deviceIDDescr, "%llu", measurement.metaData.deviceID);
     }
 
     Serial.printf("\nShowing decoded Measurement:\n");
 
     Serial.printf("  Data Point:\n");
     Serial.printf("    Measured at:\t%lus\n",
-                  measurement.datapoint.t_offset / 1000);
+                  measurement.dataPoint.t_offset / 1000);
     Serial.printf("    Value:\t\t");
-    switch (measurement.signaltype) {
+    switch (measurement.signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
     case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
     case SignalType::VELOCITY_METERS_PER_SECOND:
-        Serial.printf("%.1f\n", measurement.datapoint.value);
+        Serial.printf("%.1f\n", measurement.dataPoint.value);
         break;
     case SignalType::CO2_PARTS_PER_MILLION:
     case SignalType::HCHO_PARTS_PER_BILLION:
@@ -175,20 +175,20 @@ void printMeasurement(const Measurement &measurement) {
     case SignalType::VOC_INDEX:
     case SignalType::NOX_INDEX:
     case SignalType::GAS_CONCENTRATION:
-        Serial.printf("%i\n", static_cast<int>(measurement.datapoint.value));
+        Serial.printf("%i\n", static_cast<int>(measurement.dataPoint.value));
         break;
     default:
-        Serial.printf("%i\n", static_cast<int>(measurement.datapoint.value));
+        Serial.printf("%i\n", static_cast<int>(measurement.dataPoint.value));
         break;
     }
 
     Serial.printf("  SignalType:\n");
     Serial.printf("    Physical Quantity:\t%s\n",
-                  quantityOf(measurement.signaltype));
-    Serial.printf("    Units:\t\t%s\n", unitOf(measurement.signaltype));
+                  quantityOf(measurement.signalType));
+    Serial.printf("    Units:\t\t%s\n", unitOf(measurement.signalType));
 
     /* MetaData skipped in this example as information for fields deviceID and
-     * devicetype are not included in ManufacturerData */
+     * deviceType are not included in ManufacturerData */
 
     return;
 }
