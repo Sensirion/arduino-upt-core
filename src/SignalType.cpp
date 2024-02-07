@@ -28,8 +28,8 @@ const char *unitOf(SignalType signalType) {
         return ""; // VOC index is a unit free measure
     case SignalType::NOX_INDEX:
         return ""; // NOX index is a unit free measure
-    case SignalType::GAS_CONCENTRATION:
-        return "%";
+    case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
+        return "vol%";
     default:
         return "UNDEFINED";
     }
@@ -63,7 +63,7 @@ const char *quantityOf(SignalType signalType) {
         return "VOC INDEX";
     case SignalType::NOX_INDEX:
         return "NOX INDEX";
-    case SignalType::GAS_CONCENTRATION:
+    case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
         return "GAS CONC.";
     default:
         return "UNDEFINED";

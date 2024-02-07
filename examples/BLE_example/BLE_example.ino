@@ -104,8 +104,8 @@ float randomMeasurement(SignalType signalType) {
     case SignalType::NOX_INDEX:
         return random(100, 1000);
         break;
-    case SignalType::GAS_CONCENTRATION:
-        return random(10, 150);
+    case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
+        return random(10, 150) / 10.0;
         break;
     default:
         return 420;
@@ -164,6 +164,7 @@ void printMeasurement(const Measurement &measurement) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
     case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
     case SignalType::VELOCITY_METERS_PER_SECOND:
+    case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
         Serial.printf("%.1f\n", measurement.dataPoint.value);
         break;
     case SignalType::CO2_PARTS_PER_MILLION:
@@ -174,7 +175,6 @@ void printMeasurement(const Measurement &measurement) {
     case SignalType::PM10P0_MICRO_GRAMM_PER_CUBIC_METER:
     case SignalType::VOC_INDEX:
     case SignalType::NOX_INDEX:
-    case SignalType::GAS_CONCENTRATION:
         Serial.printf("%i\n", static_cast<int>(measurement.dataPoint.value));
         break;
     default:
