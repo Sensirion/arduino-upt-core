@@ -1,5 +1,5 @@
 # UPT Core
-
+[![arduino-library-badge](https://www.ardu-badge.com/badge/Sensirion%20UPT%20Core.svg?)](https://www.ardu-badge.com/Sensirion%20UPT%20Core) [![PlatformIO Registry](https://badges.registry.platformio.org/packages/sensirion/library/Sensirion_UPT_Core.svg)](https://registry.platformio.org/libraries/sensirion/Sensirion_UPT_Core)
 A library containing all the relevant types and definitions shared between components of the Unified Prototyping Toolkit (UPT) for ease of maintainability.
 There shouldn't be a reason to use it directly, but it is being used to create libraries compatible with the rest of the UPT.
 
