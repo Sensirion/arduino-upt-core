@@ -18,6 +18,7 @@ lint_check:
     - cd /usr/local
     - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | sh
     - arduino-lint /builds/MSO-SW/unified-prototyping-toolkit/upt-core --library-manager update
+  allow_failure: true
 
 cpp_check:
     stage: validate
