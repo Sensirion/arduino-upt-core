@@ -90,14 +90,16 @@ void printMeasurement(const Measurement &measurement) {
 
 std::string arrayifyDeviceID(uint64_t deviceID) {
     std::string address;
-    for (int s = 5; s > -1; s--) {
-        address[s] = static_cast<uint8_t>(deviceID);
+    address.reserve(6);
+    for (int i = 0; i < 6; i++) {
+        address.insert(address.begin(), static_cast<char>(deviceID));
         deviceID = deviceID >> 8;
     }
     return address;
 }
 
 void printMACAddess(const std::string &macAddress) {
+    assert(macAddress.capacity() >= 6);
     for (int i = 0; i < 5; i++) {
         Serial.printf("%X:", macAddress[i]);
     }

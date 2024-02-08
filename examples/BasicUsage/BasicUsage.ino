@@ -29,6 +29,7 @@ void loop() {
 
     Serial.printf("Showing Measurement:\n");
     printMeasurement(dummyMeasurement);
+    Serial.println();
 }
 
 Measurement createRandomMeasurement() {

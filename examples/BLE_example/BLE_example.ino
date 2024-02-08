@@ -11,7 +11,7 @@ https://github.com/Sensirion/arduino-ble-gadget/blob/master/documents/00-Sensiri
 #include "Arduino.h"
 #include "Sensirion_UPT_Core.h"
 
-static const uint16_t SENSIRION_BLE_COMPANY_ID = 54534; //0xD506
+static const uint16_t SENSIRION_BLE_COMPANY_ID = 54534; // 0xD506
 std::string generateBLEAdvertisement(DataType dataType);
 float randomMeasurement(SignalType signalType);
 void decodeAndPrintBLEAdvertisement(const std::string &data);
@@ -127,7 +127,7 @@ void decodeAndPrintBLEAdvertisement(const std::string &data) {
 
     For a total length l = 6 + SampleConfig.sampleSizeBytes bytes
     */
-    uint16_t companyID  = (uint16_t)data[0] << 8 | (uint8_t)data[1];
+    uint16_t companyID = (uint16_t)data[0] << 8 | (uint8_t)data[1];
     assert(companyID == SENSIRION_BLE_COMPANY_ID);
 
     DataType decodedDataType =
