@@ -1,0 +1,23 @@
+name: PIO Lib
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  PlatformIO-Check:
+    uses: ./.github/workflows/platformio_check_template.yml
+    with:
+      pio-environment-list: '["esp32dev"]'
+      pio-ini-location: "./examples/exampleUsage"
+
+  PlatformIO-Build:
+    uses: ./.github/workflows/platformio_build_template.yml
+    with:
+      pio-environment-list: '["esp32dev"]'
+      pio-ini-location: "./examples/exampleUsage"
+

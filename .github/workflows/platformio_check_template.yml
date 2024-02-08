@@ -1,0 +1,34 @@
+name: PlatformIO Check
+
+on:
+  workflow_call:
+    inputs:
+      pio-environment-list:
+        type: string
+        default: '["usage_example"]'
+      pio-ini-location:
+        type: string
+        default: '.'
+
+jobs:
+  platformio-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ${{ fromJSON(inputs.pio-environment-list) }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+      - name: Run 'pio check'
+        working-directory: ${{ inputs.pio-ini-location }}
+        run: pio check -e ${{ matrix.environment }}
