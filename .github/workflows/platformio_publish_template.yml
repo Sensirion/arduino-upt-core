@@ -7,6 +7,10 @@ on:
                 type: string
                 description: The user/org that will be the owner of the published package
                 default: "sensirion"
+            should-publish:
+                type: boolean
+                description: Should the package be published to the registry
+                default: false
         secrets:
             pio-registry-token:
                 description: PlatformIO Token used to login
@@ -42,12 +46,18 @@ jobs:
                   cp LICENSE tmp
                   cp platformio.ini tmp
                   cp README.md tmp
-
             - name: Create library package
               run: pio pkg pack tmp
+            - name: Upload package archive
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pio-library-archive
+                  path: /*.tar.gz
+                  retention-days: 2
             - name: Login into PlatformIO
               run: pio account login
               env:
                   PLATFORMIO_AUTH_TOKEN: ${{ secrets.pio-registry-token }}
-            # - name: Run 'pio pkg publish'
-            #   run: pio pkg publish --owner ${{ inputs.pkg-owner }} --no-interactive ./*.tar.gz
+            - name: Run 'pio pkg publish'
+              if: ${{ inputs.should-publish }}
+              run: pio pkg publish --owner ${{ inputs.pkg-owner }} --no-interactive ./*.tar.gz
