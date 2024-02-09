@@ -1,23 +1,39 @@
 name: PIO Lib
 
 on:
-  pull_request:
-    branches:
-      - main
-  push:
-    branches:
-      - main
+    pull_request:
+        branches:
+            - master
+    push:
+        branches:
+            - master
+        tags:
+            - "[0-9]+.[0-9]+.[0-9]+"
 
 jobs:
-  PlatformIO-Check:
-    uses: ./.github/workflows/platformio_check_template.yml
-    with:
-      pio-environment-list: '["esp32dev"]'
-      pio-ini-location: "./examples/exampleUsage"
+    PlatformIO-Check:
+        uses: ./.github/workflows/platformio_check_template.yml
+        with:
+            pio-environment-list: '["esp32dev"]'
 
-  PlatformIO-Build:
-    uses: ./.github/workflows/platformio_build_template.yml
-    with:
-      pio-environment-list: '["esp32dev"]'
-      pio-ini-location: "./examples/exampleUsage"
+    PlatformIO-Build:
+        uses: ./.github/workflows/platformio_build_template.yml
+        needs: PlatformIO-Check
+        with:
+            pio-environment-list: '["esp32dev"]'
 
+    PlatformIO-Package:
+        if: github.ref_type != 'tag'
+        needs: PlatformIO-Build
+        uses: ./.github/workflows/platformio_publish_template.yml
+        with:
+            should-publish: false
+
+    PlatformIO-Publish:
+        uses: ./.github/workflows/platformio_publish_template.yml
+        if: github.ref_type == 'tag'
+        needs: PlatformIO-Build
+        with:
+            should-publish: true
+        secrets:
+            pio-registry-token: ${{ secrets.PIO_MKTSW_TOKEN }}

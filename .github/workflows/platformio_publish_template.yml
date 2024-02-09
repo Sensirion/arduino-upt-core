@@ -14,7 +14,7 @@ on:
         secrets:
             pio-registry-token:
                 description: PlatformIO Token used to login
-                required: true
+                required: false
 
 jobs:
     platformio-publish:
