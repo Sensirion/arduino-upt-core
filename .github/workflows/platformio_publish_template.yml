@@ -58,7 +58,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: pio-library-archive
-                  path: /*.tar.gz
+                  path: ./*.tar.gz
                   retention-days: 2
             - name: Login into PlatformIO
               if: ${{ inputs.should-publish }}
