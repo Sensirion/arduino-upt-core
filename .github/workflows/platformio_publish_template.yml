@@ -14,20 +14,20 @@ on:
         secrets:
             pio-registry-token:
                 description: PlatformIO Token used to login
-                required: true
+                required: false
 
 jobs:
     platformio-publish:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/cache@v3
+            - uses: actions/checkout@v4
+            - uses: actions/cache@v4
               with:
                   path: |
                       ~/.cache/pip
                       ~/.platformio/.cache
                   key: ${{ runner.os }}-pio
-            - uses: actions/setup-python@v4
+            - uses: actions/setup-python@v5
               with:
                   python-version: "3.9"
             - name: Install PlatformIO Core
@@ -61,6 +61,7 @@ jobs:
                   path: /*.tar.gz
                   retention-days: 2
             - name: Login into PlatformIO
+              if: ${{ inputs.should-publish }}
               run: pio account login
               env:
                   PLATFORMIO_AUTH_TOKEN: ${{ secrets.pio-registry-token }}
