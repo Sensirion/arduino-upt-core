@@ -31,7 +31,7 @@ jobs:
 
     PlatformIO-Publish:
         uses: ./.github/workflows/platformio_publish_template.yml
-        if: ${{ (github.ref_type == 'tag') && (github.ref_name == 'master') }}
+        if: github.ref_type == 'tag'
         needs: PlatformIO-Build
         with:
             should-publish: true
