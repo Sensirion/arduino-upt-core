@@ -14,13 +14,13 @@ jobs:
     PlatformIO-Check:
         uses: ./.github/workflows/platformio_check_template.yml
         with:
-            pio-environment-list: '["esp32dev"]'
+            pio-environment-list: '["ble_example", "basicUsage"]'
 
     PlatformIO-Build:
         uses: ./.github/workflows/platformio_build_template.yml
         needs: PlatformIO-Check
         with:
-            pio-environment-list: '["esp32dev"]'
+            pio-environment-list: '["ble_example", "basicUsage"]'
 
     PlatformIO-Package:
         if: github.ref_type != 'tag'
