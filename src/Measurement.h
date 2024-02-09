@@ -58,4 +58,24 @@ const char *devicePlatformLabel(DevicePlatform devicePlatform,
  */
 const char *deviceLabel(DevicePlatform platform, DeviceType deviceType);
 
+/**
+ * @brief print Measurement.metaData to console via Arduino Serial
+ */
+void printMeasurementMetaData(const Measurement &measurement);
+
+/**
+ * @brief print Measurement without Measurement.metaData to console via Arduino
+ * Serial
+ */
+void printMeasurementWithoutMetaData(const Measurement &measurement);
+
+/**
+ * @brief print Measurement to console via Arduino Serial
+ */
+void printMeasurement(const Measurement &measurement);
+
+// Utilities for printing methods
+std::string arrayifyDeviceID(uint64_t deviceID);
+void printMACAddess(const std::string &macAddress);
+
 #endif /* _MEASUREMENT_H_ */
