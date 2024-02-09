@@ -23,7 +23,7 @@ jobs:
             pio-environment-list: '["ble_example", "basicUsage"]'
 
     PlatformIO-Package:
-        if: github.ref_type != 'tag'
+        if: ${{ (github.ref_type != 'tag') && (github.ref_name == 'master') }}
         needs: PlatformIO-Build
         uses: ./.github/workflows/platformio_publish_template.yml
         with:
@@ -31,7 +31,7 @@ jobs:
 
     PlatformIO-Publish:
         uses: ./.github/workflows/platformio_publish_template.yml
-        if: github.ref_type == 'tag'
+        if: ${{ (github.ref_type == 'tag') && (github.ref_name == 'master') }}
         needs: PlatformIO-Build
         with:
             should-publish: true
