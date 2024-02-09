@@ -61,6 +61,7 @@ jobs:
                   path: /*.tar.gz
                   retention-days: 2
             - name: Login into PlatformIO
+              if: ${{ inputs.should-publish }}
               run: pio account login
               env:
                   PLATFORMIO_AUTH_TOKEN: ${{ secrets.pio-registry-token }}
