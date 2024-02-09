@@ -1,0 +1,69 @@
+name: PlatformIO Publish
+
+on:
+    workflow_call:
+        inputs:
+            pkg-owner:
+                type: string
+                description: The user/org that will be the owner of the published package
+                default: "sensirion"
+            should-publish:
+                type: boolean
+                description: Should the package be published to the registry
+                default: false
+        secrets:
+            pio-registry-token:
+                description: PlatformIO Token used to login
+                required: true
+
+jobs:
+    platformio-publish:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/cache@v3
+              with:
+                  path: |
+                      ~/.cache/pip
+                      ~/.platformio/.cache
+                  key: ${{ runner.os }}-pio
+            - uses: actions/setup-python@v4
+              with:
+                  python-version: "3.9"
+            - name: Install PlatformIO Core
+              run: pip install --upgrade platformio
+            - name: Recreate tmp folder
+              run: |
+                  if [ -d ./tmp/ ]; then rm -Rf ./tmp/; fi
+                  mkdir ./tmp/
+            - name: Select relevant resource to package
+              run: |
+                  cp -r examples tmp
+                  cp -r src tmp
+                  cp -r py_scripts tmp
+                  cp CHANGELOG.md tmp
+                  cp library.properties tmp
+                  cp LICENSE tmp
+                  cp platformio.ini tmp
+                  cp README.md tmp
+            - name: Remove 'Sensirion' from lib name
+              run: |
+                  nameline=$(head -n 1 tmp/library.properties)
+                  toremove='Sensirion '
+                  pioname="${nameline/$toremove/}"
+                  sed -i "1s/.*/$pioname/" tmp/library.properties
+            - name: Create library package
+              run: pio pkg pack tmp
+            - name: Upload package archive
+              uses: actions/upload-artifact@v4
+              with:
+                  name: pio-library-archive
+                  path: /*.tar.gz
+                  retention-days: 2
+            - name: Login into PlatformIO
+              run: pio account login
+              env:
+                  PLATFORMIO_AUTH_TOKEN: ${{ secrets.pio-registry-token }}
+            - name: Run 'pio pkg publish'
+              if: ${{ inputs.should-publish }}
+              run: pio pkg publish --owner ${{ inputs.pkg-owner }} --no-interactive ./*.tar.gz
