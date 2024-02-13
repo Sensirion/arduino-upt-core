@@ -46,12 +46,6 @@ jobs:
                   cp LICENSE tmp
                   cp platformio.ini tmp
                   cp README.md tmp
-            - name: Remove 'Sensirion' from lib name
-              run: |
-                  nameline=$(head -n 1 tmp/library.properties)
-                  toremove='Sensirion '
-                  pioname="${nameline/$toremove/}"
-                  sed -i "1s/.*/$pioname/" tmp/library.properties
             - name: Create library package
               run: pio pkg pack tmp
             - name: Upload package archive
