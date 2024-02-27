@@ -165,29 +165,37 @@ This library requires standard library compatibility. Some boards such as Arduin
 ### Arduino
 
 1. Download [Arduino IDE](http://www.arduino.cc/en/main/software) and setup the environment for ESP32 platform
-    - Follow [this guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html)
-    - Detailed Instructions for advanced users: [Arduino-ESP32](https://github.com/espressif/arduino-esp32)
-2. Start the Arduino IDE and open the Library Manager by selecting `Sketch` -> `Include Library` -> `Manage Libraries...`. Search for the `Sensirion_Unified_Prototyping_Toolkit_Core` library in the `Filter your search...` field and install it by clicking the `install` button.
+	* Follow [this guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html)
+	* Detailed Instructions for advanced users: [Arduino-ESP32](https://github.com/espressif/arduino-esp32)
+2. Start the Arduino IDE and open the Library Manager by selecting `Sketch` -> `Include Library` -> `Manage Libraries...`. Search for the `Sensirion UPT Core` library in the `Filter your search...` field and install it by clicking the `install` button.
 3. Connect your ESP32 DevKit to your computer.
 4. In the Arduino IDE, make sure you have the `ESP32 Dev Module` and the correct Port selected.
 5. Select `File` -> `Examples` -> `Sensirion Gadget BLE Lib` -> **`BasicUsage`**.
 6. Connect your board and click the upload button.
+7. The Serial Monitor displays randomly generated mock Measurements.
+
+For users interested in the BLE en/decoding features, example script `BLE_example` is available.
 
 ### PlatformIO
 
 1. To install the PlatformIO Core, follow the steps detailed [here](https://docs.platformio.org/en/latest/core/installation/methods/installer-script.html).
-2. Install the library using the terminal:
-
-```bash
-pio lib install Sensirion_UPT_Core
-```
-
-3. After you've conected your board, Compile, Upload and view Serial output using the terminal:
-
+2. Open this project in PlatformIO.
+3. After you've conected your board, Compile, Upload and view Serial output or example script `BasicUsage` using the terminal:
 ```bash
 pio run -t upload && pio device monitor
 ```
+4. The Serial Monitor displays randomly generated mock Measurements.
 
-As of November '23, platformio cannot compile `.ino` files if they're in a subdirectory of the project directory. Thus, the example `.ino` file is copied to a `.cpp` file during the build process.
+For users interested in the BLE en/decoding features, example script `BLE_example` is available. It can be run with
+```bash
+pio run -e ble_example -t upload && pio device monitor
+```
 
-The example script will now display mock sensor measurements in the console.
+The example script will now display mock BLE advertisements in the console.
+
+To use this library in your project, add `Sensirion UPT Core` to your `lib_deps` in the `platformio.ini` file.
+
+
+## License
+
+See [LICENSE](LICENSE).
