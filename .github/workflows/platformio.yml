@@ -12,12 +12,12 @@ on:
 
 jobs:
     PlatformIO-Check:
-        uses: ./.github/workflows/platformio_check_template.yml
+        uses: sensirion/.github/.github/workflows/platformio_check.yml@main
         with:
             pio-environment-list: '["ble_example", "basicUsage"]'
 
     PlatformIO-Build:
-        uses: ./.github/workflows/platformio_build_template.yml
+        uses: sensirion/.github/.github/workflows/platformio_build.yml@main
         needs: PlatformIO-Check
         with:
             pio-environment-list: '["ble_example", "basicUsage"]'
@@ -25,12 +25,12 @@ jobs:
     PlatformIO-Package:
         if: ${{ (github.ref_type != 'tag') && (github.ref_name == 'master') }}
         needs: PlatformIO-Build
-        uses: ./.github/workflows/platformio_publish_template.yml
+        uses: sensirion/.github/.github/workflows/platformio_publish.yml@main
         with:
             should-publish: false
 
     PlatformIO-Publish:
-        uses: ./.github/workflows/platformio_publish_template.yml
+        uses: sensirion/.github/.github/workflows/platformio_publish.yml@main
         if: github.ref_type == 'tag'
         needs: PlatformIO-Build
         with:
