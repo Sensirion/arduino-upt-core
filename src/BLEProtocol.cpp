@@ -83,7 +83,7 @@ std::map<DataType, SampleConfig> sampleConfigSelector = {
      {.dataType = DataType::T_RH_CO2_ALT,
       .downloadType = 7,
       .sampleType = 8,
-      .sampleSizeBytes = 6, // ALT is not being sent
+      .sampleSizeBytes = 8, 
       .sampleCountPerPacket = 2,
       .sensirionAdvertisementSampleType = 0,
       .sampleSlots = {{SignalType::TEMPERATURE_DEGREES_CELSIUS,
@@ -100,7 +100,9 @@ std::map<DataType, SampleConfig> sampleConfigSelector = {
                        {.signalType = SignalType::CO2_PARTS_PER_MILLION,
                         .offset = 4,
                         .encodingFunction = &encodeSimple,
-                        .decodingFunction = &decodeSimple}}}}},
+                        .decodingFunction = &decodeSimple}}
+                        // 2 Bytes reserved (ALT), not used, but bytes must be sent for proper decoding of samples
+                        }}},
     {T_RH_CO2_PM25,
      {.dataType = DataType::T_RH_CO2_PM25,
       .downloadType = 11,
