@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.3.2] - 2024-06-19
+
+### Fixed
+- Add missing string import to BLEProtocol.h and Measurement.h
+
 ## [0.3.1] - 2024-05-21
 
 ### Fixed
