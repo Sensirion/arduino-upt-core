@@ -5,6 +5,7 @@
 #include "SensorType.h"
 #include "SignalType.h"
 #include <Arduino.h>
+#include <string>
 
 struct DataPoint {
     unsigned long t_offset = 0;
