@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "SignalType.h"
 #include <map>
+#include <string>
 
 /**
  * Refer to
