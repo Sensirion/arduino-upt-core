@@ -19,7 +19,8 @@ enum class SensorType {
     STC3X,
     STC31,
     SGP4X,
-    SGP41
+    SGP41,
+    SEN66
 };
 
 /**
