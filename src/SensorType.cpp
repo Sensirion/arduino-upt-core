@@ -32,6 +32,8 @@ const char *sensorLabel(SensorType sensorType) {
         return "SGP4X";
     case SensorType::SGP41:
         return "SGP41";
+    case SensorType::SEN66:
+        return "SEN66";
     default:
         return "UNDEFINED";
     }
