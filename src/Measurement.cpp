@@ -55,6 +55,7 @@ void printMeasurementWithoutMetaData(const Measurement &measurement) {
     Serial.printf("    Value:\t\t");
     switch (measurement.signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
+    case SignalType::TEMPERATURE_DEGREES_FARENHEIT:
     case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
     case SignalType::VELOCITY_METERS_PER_SECOND:
         Serial.printf("%.1f\n", measurement.dataPoint.value);

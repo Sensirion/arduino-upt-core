@@ -4,6 +4,8 @@ const char *unitOf(SignalType signalType) {
     switch (signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
         return "degC";
+    case SignalType::TEMPERATURE_DEGREES_FARENHEIT:
+        return "degF";
     case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
         return "%";
     case SignalType::CO2_PARTS_PER_MILLION:
@@ -38,6 +40,7 @@ const char *unitOf(SignalType signalType) {
 const char *quantityOf(SignalType signalType) {
     switch (signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
+    case SignalType::TEMPERATURE_DEGREES_FARENHEIT:
         return "T";
     case SignalType::RELATIVE_HUMIDITY_PERCENTAGE:
         return "RH";
