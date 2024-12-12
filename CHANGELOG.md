@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.5.1] - 2024-12-11
+
+### Fixed
+
+- Fix download definition T_RH_VOC_NOX_PM25 to only have 1 sample per download pack.
+  With 2 there was a buffer overflow leading to a crash when starting a data download 
+  for a gadget built with arduino-ble-gadget using T_RH_VOC_NOX_PM25 (e.g. SEN55 Example)
+  The fixed definition is supported by MyAmbience Version 3.5.0 onwards.
+
 ## [0.5.0] - 2024-09-09
 
 ### Added
