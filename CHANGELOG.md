@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.6.0] - 2025-06-25
+
+### Added
+- Added STCC4 to sensor types
+- Added SFA40 to sensor types
+
 ## [0.5.1] - 2024-12-11
 
 ### Fixed

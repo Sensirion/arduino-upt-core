@@ -7,6 +7,7 @@ enum class SensorType {
     UNDEFINED,
     SCD4X,
     SFA3X,
+    SFA40,
     SVM4X,
     SVM41,
     SHT4X,
@@ -20,7 +21,8 @@ enum class SensorType {
     STC31,
     SGP4X,
     SGP41,
-    SEN66
+    SEN66,
+    STCC4
 };
 
 /**
