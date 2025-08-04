@@ -107,12 +107,14 @@ and can be queried in a dictionary (implemented as a `std::map`) provided by thi
 
 #### SampleType and DataType
 
-These two identifiers (`SampleType` is a `uint8_t` and `DataType` an `enum`) serve as the main ways to
-identify (1) the shape of the transmission message, and (2) the nature of the contents therein. The device sending the advertisement (such as an Arduino board running [Sensirion's BLE DIY Gadget software](https://github.com/Sensirion/arduino-ble-gadget)) typically knows what signals it wants to send (and therefore selects an appropriate `DataType`), while the receiving device reads the `SignalType` field in the `ManufacturerData` part of the BLE Advertisement message and maps it to the corresponding `DataType`.
+These two identifiers (`SampleType` is a `uint8_t` and `DataType` an `enum`) serve as the main ways to identify (1)
+the shape of the transmission message, and (2) the nature of the contents therein.
 
-For example, a [Sensirion MyCO<sub>2</sub> Gadget](https://sensirion.com/products/catalog/SCD4x-CO2-Gadget/) sends an advertisement identified by `DataType::T_RH_CO2_ALT` and `SignalType = 8`, and containing the temperature, relative humidity and CO<sub>2</sub> concentration measured by the device.
+The device sending the advertisement (such as an Arduino board running [Sensirion's BLE DIY Gadget software](https://github.com/Sensirion/arduino-ble-gadget)) typically knows what signals it wants to send (and therefore selects an appropriate `SampleType`), while the receiving device reads the `SampleType` field in the `ManufacturerData` part of the BLE Advertisement message and maps it to the corresponding `DataType`.
 
-Please refer to the [Sensirion BLE Communication Protocol](https://github.com/Sensirion/arduino-ble-gadget/blob/master/documents/00-Sensirion_BLE_communication_protocol.pdf) for a list of available `SignalType`s and for the structure of a Sensirion BLE Advertisement.
+For example, a [Sensirion MyCO<sub>2</sub> Gadget](https://sensirion.com/products/catalog/SCD4x-CO2-Gadget/) sends an advertisement identified by `SampleType = 8`. The receiving client maps it to the DataType `DataType::T_RH_CO2_ALT`. This information allows to retrieve and decode the contained temperature, relative humidity and CO<sub>2</sub> concentration measured by the device.
+
+Please refer to the [Sensirion BLE Communication Protocol](https://sensirion.github.io/ble-services/) for a list of available `SignalType`s and for the structure of a Sensirion BLE Advertisement.
 
 #### SampleConfig
 
