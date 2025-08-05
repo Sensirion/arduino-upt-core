@@ -137,7 +137,9 @@ void decodeAndPrintBLEAdvertisement(const std::string &data) {
     // Extract data piece-by-piece, using SampleConfig
     for (auto it = sampleConfig.sampleSlots.begin();
          it != sampleConfig.sampleSlots.end(); it++) {
-        Measurement measurement;
+        Measurement measurement{DeviceTypeRegistry::CreateDeviceType(
+            "dummy", DevicePlatform::BLE, DeviceTypeRegistry::NO_ALIAS
+        )};
         measurement.signalType = it->first;
 
         measurement.dataPoint.t_offset = millis();

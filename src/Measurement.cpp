@@ -1,4 +1,5 @@
 #include "Measurement.h"
+#include "DeviceType.h"
 
 const char *devicePlatformLabel(DevicePlatform platform,
                                 DeviceType deviceType) {
@@ -13,14 +14,7 @@ const char *devicePlatformLabel(DevicePlatform platform,
 }
 
 const char *deviceLabel(DevicePlatform platform, DeviceType deviceType) {
-    switch (platform) {
-    case DevicePlatform::WIRED:
-        return sensorLabel(deviceType.sensorType);
-    case DevicePlatform::BLE:
-        return bleGadgetLabel(deviceType.bleGadgetType);
-    default:
-        return "UNDEFINED";
-    }
+    return deviceType.data();
 }
 
 void printMeasurementMetaData(const Measurement &measurement) {
