@@ -6,22 +6,13 @@
 #include "SignalType.h"
 #include <Arduino.h>
 #include <string>
+#include <DeviceType.h>
 
 struct DataPoint {
     unsigned long t_offset = 0;
     float value = 0;
 };
 
-enum class DevicePlatform {
-    UNDEFINED,
-    BLE,
-    WIRED,
-};
-
-union DeviceType {
-    SensorType sensorType;
-    BLEGadgetType bleGadgetType;
-};
 
 struct MetaData {
     DevicePlatform platform = DevicePlatform::UNDEFINED;
@@ -39,10 +30,13 @@ struct MetaData {
     uint64_t deviceID = 0;
     DeviceType deviceType;
 
-    MetaData() : deviceType{SensorType::UNDEFINED} {};
+    explicit MetaData(const DeviceType& deviceType) : deviceType{deviceType} {};
 };
 
 struct Measurement {
+    explicit Measurement(const DeviceType& deviceType): metaData{deviceType}{}
+    Measurement(const MetaData& metadata, const SignalType signalType, const DataPoint& dataPoint):
+        metaData{metaData}, signalType{signalType}, dataPoint{dataPoint}{}
     DataPoint dataPoint;
     SignalType signalType = SignalType::UNDEFINED;
     MetaData metaData;

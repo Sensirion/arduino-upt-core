@@ -1,42 +1,11 @@
 #include "BLEGadgetType.h"
 #include <Arduino.h>
+#include "DeviceType.h"
 
-const char *bleGadgetLabel(BLEGadgetType bleGadgetType) {
-    switch (bleGadgetType) {
-    case BLEGadgetType::AQ_MINION:
-        return "AQ-Minion";
-    case BLEGadgetType::MYCO2:
-        return "MyCO2";
-    case BLEGadgetType::SHT40_GADGET:
-        return "SHT40-Gadget";
-    case BLEGadgetType::SHT43_GADGET:
-        return "SHT43-DB";
-    case BLEGadgetType::BLE_DIY_GADGET:
-        return "DIY Gadget";
-    case BLEGadgetType::HUMI_GADGET:
-        return "n/a";
-    default:
-        return "n/a";
-    }
-}
+const DeviceType BLEGadgetType::AQ_MINION = DeviceTypeRegistry::CreateBleDeviceType("AQ Minion");
+const DeviceType BLEGadgetType::BLE_DIY_GADGET = DeviceTypeRegistry::CreateDeviceType("DIY Gadget", DevicePlatform::BLE, "S");
+const DeviceType BLEGadgetType::MYCO2 = DeviceTypeRegistry::CreateBleDeviceType("MyCO2");
+const DeviceType BLEGadgetType::SHT40_GADGET = DeviceTypeRegistry::CreateBleDeviceType("SHT40 Gadget");
+const DeviceType BLEGadgetType::SHT43_GADGET = DeviceTypeRegistry::CreateBleDeviceType("SHT43 DB");
+const DeviceType BLEGadgetType::HUMI_GADGET = DeviceTypeRegistry::CreateBleDeviceType("Smart Humigadget");
 
-BLEGadgetType
-bleGadgetTypeFromCompleteLocalName(const char *completeLocalName) {
-    size_t inBufSize = strlen(completeLocalName);
-    if (strncmp(completeLocalName, "AQ Minion", inBufSize) == 0) {
-        return BLEGadgetType::AQ_MINION;
-    } else if (strncmp(completeLocalName, "MyCO2", inBufSize) == 0) {
-        return BLEGadgetType::MYCO2;
-    } else if (strncmp(completeLocalName, "sensi", inBufSize) == 0 ||
-               strncmp(completeLocalName, "S", inBufSize) == 0) {
-        return BLEGadgetType::BLE_DIY_GADGET;
-    } else if (strncmp(completeLocalName, "SHT40 Gadget", inBufSize) == 0) {
-        return BLEGadgetType::SHT40_GADGET;
-    } else if (strncmp(completeLocalName, "SHT43 DB", inBufSize) == 0) {
-        return BLEGadgetType::SHT43_GADGET;
-    } else if (strncmp(completeLocalName, "Smart Humigadget", inBufSize) == 0) {
-        return BLEGadgetType::HUMI_GADGET;
-    } else {
-        return BLEGadgetType::UNDEFINED;
-    }
-}
