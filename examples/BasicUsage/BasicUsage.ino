@@ -3,11 +3,14 @@ The code below repeatedly prints random measurements representative of the
 typical instances one might encounter using the Unified Prototyping Toolkit.
 */
 
+
 #include "Arduino.h"
 #include "Sensirion_UPT_Core.h"
 
+using namespace upt_core;
+
 Measurement createRandomMeasurement();
-Measurement dummyMeasurement;
+Measurement dummyMeasurement{createRandomMeasurement()};
 
 void setup() {
     Serial.begin(115200);
@@ -33,10 +36,15 @@ void loop() {
 }
 
 Measurement createRandomMeasurement() {
-    Measurement measurement;
+    DevicePlatform p = DevicePlatform::WIRED;
+    if (random(2)){
+        p = DevicePlatform::BLE;
+    }
+    Measurement measurement{DeviceTypeRegistry::CreateDeviceType("dummy", p, 
+        DeviceTypeRegistry::NO_ALIAS)};
 
     // Metadata
-    if (random(2)) { // I2C Sensor
+    if (p == DevicePlatform::WIRED) { // I2C Sensor
         measurement.metaData.platform = DevicePlatform::WIRED;
         uint64_t deviceID = 0;
         // Serial No. for i2c sensors typically is a 48-bit value
@@ -44,8 +52,6 @@ Measurement createRandomMeasurement() {
             deviceID = deviceID | (random(2) << i);
         }
         measurement.metaData.deviceID = deviceID;
-        measurement.metaData.deviceType.sensorType =
-            static_cast<SensorType>(random(1, 16));
     } else { // BLE Gadget
         measurement.metaData.platform = DevicePlatform::BLE;
         uint64_t deviceID = 0;
@@ -54,8 +60,6 @@ Measurement createRandomMeasurement() {
             deviceID = deviceID | (random(2) << i);
         }
         measurement.metaData.deviceID = deviceID;
-        measurement.metaData.deviceType.bleGadgetType =
-            static_cast<BLEGadgetType>(random(1, 7));
     }
 
     // SignalType

@@ -1,4 +1,7 @@
 #include "Measurement.h"
+#include "DeviceType.h"
+
+namespace upt_core{
 
 const char *devicePlatformLabel(DevicePlatform platform,
                                 DeviceType deviceType) {
@@ -13,14 +16,7 @@ const char *devicePlatformLabel(DevicePlatform platform,
 }
 
 const char *deviceLabel(DevicePlatform platform, DeviceType deviceType) {
-    switch (platform) {
-    case DevicePlatform::WIRED:
-        return sensorLabel(deviceType.sensorType);
-    case DevicePlatform::BLE:
-        return bleGadgetLabel(deviceType.bleGadgetType);
-    default:
-        return "UNDEFINED";
-    }
+    return deviceType.data();
 }
 
 void printMeasurementMetaData(const Measurement &measurement) {
@@ -106,3 +102,5 @@ void printMACAddess(const std::string &macAddress) {
     }
     Serial.printf("%X", macAddress[5]);
 }
+
+} // end namespace

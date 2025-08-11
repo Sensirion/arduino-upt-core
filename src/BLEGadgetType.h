@@ -1,26 +1,20 @@
 #ifndef _BLE_GADGET_TYPE_H_
 #define _BLE_GADGET_TYPE_H_
 
-/* List of supported Sensirion BLE Gadgets */
-enum class BLEGadgetType {
-    UNDEFINED,
-    AQ_MINION,
-    MYCO2,
-    SHT40_GADGET,
-    SHT43_GADGET, // SHT43 DB
-    BLE_DIY_GADGET,
-    HUMI_GADGET // SHT3X Gadget
+#include "DeviceType.h"
+
+namespace upt_core{
+/// List of supported Sensirion BLE Gadgets
+///
+/// Using a struct allows to access the Device Types 
+/// in the same was as the enum fields
+struct BLEGadgetType{
+    static const DeviceType AQ_MINION;
+    static const DeviceType MYCO2;
+    static const DeviceType SHT40_GADGET;
+    static const DeviceType SHT43_GADGET; // SHT43 DB
+    static const DeviceType BLE_DIY_GADGET;
+    static const DeviceType HUMI_GADGET; // Smart humigadget
 };
-
-/**
- * @brief get a short label corresponding to a BLEGadgetType
- */
-const char *bleGadgetLabel(BLEGadgetType bleGadgetType);
-
-/**
- * @brief map a Complete Local Name string (as received via BLE Adv.) to a
- * BLEGadgetType
- */
-BLEGadgetType bleGadgetTypeFromCompleteLocalName(const char *completeLocalName);
-
+} // end namespace
 #endif /* _BLE_GADGET_TYPE_H_ */

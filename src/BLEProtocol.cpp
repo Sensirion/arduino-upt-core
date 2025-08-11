@@ -1,5 +1,6 @@
 #include "BLEProtocol.h"
 
+namespace upt_core{
 std::map<DataType, SampleConfig> sampleConfigSelector = {
     {T_RH_V3,
      {.dataType = DataType::T_RH_V3,
@@ -566,3 +567,4 @@ DataType getDataTypeFromSampleType(uint8_t sampleType) {
     }
     return DataType::UNDEFINED;
 }
+} // end namespace
