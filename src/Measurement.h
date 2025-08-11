@@ -8,6 +8,8 @@
 #include <string>
 #include <DeviceType.h>
 
+namespace upt_core{
+
 struct DataPoint {
     unsigned long t_offset = 0;
     float value = 0;
@@ -72,5 +74,7 @@ void printMeasurement(const Measurement &measurement);
 // Utilities for printing methods
 std::string arrayifyDeviceID(uint64_t deviceID);
 void printMACAddess(const std::string &macAddress);
+
+} // end namespace
 
 #endif /* _MEASUREMENT_H_ */

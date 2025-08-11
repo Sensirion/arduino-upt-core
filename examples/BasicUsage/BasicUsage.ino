@@ -3,8 +3,11 @@ The code below repeatedly prints random measurements representative of the
 typical instances one might encounter using the Unified Prototyping Toolkit.
 */
 
+
 #include "Arduino.h"
 #include "Sensirion_UPT_Core.h"
+
+using namespace upt_core;
 
 Measurement createRandomMeasurement();
 Measurement dummyMeasurement{createRandomMeasurement()};

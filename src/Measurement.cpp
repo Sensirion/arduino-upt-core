@@ -1,6 +1,8 @@
 #include "Measurement.h"
 #include "DeviceType.h"
 
+namespace upt_core{
+
 const char *devicePlatformLabel(DevicePlatform platform,
                                 DeviceType deviceType) {
     switch (platform) {
@@ -100,3 +102,5 @@ void printMACAddess(const std::string &macAddress) {
     }
     Serial.printf("%X", macAddress[5]);
 }
+
+} // end namespace

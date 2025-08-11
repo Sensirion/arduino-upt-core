@@ -14,6 +14,7 @@
 #include <vector>
 #include <optional>
 
+namespace upt_core{
 
 enum class DevicePlatform: uint8_t {
     UNDEFINED,
@@ -89,5 +90,6 @@ public:
 
 };
 
+} // namespace upt_core
 
 #endif //_DEVICE_TYPE_H_

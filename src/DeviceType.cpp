@@ -3,6 +3,7 @@
 #include "Arduino.h"
 #include "SensorType.h"
 
+namespace upt_core{
 
 /// Helper function to search the registry
 /// @param key key to search for
@@ -89,3 +90,6 @@ DeviceTypeRegistry::deviceTypeRegistry(){
     static RegistryType* registry = new RegistryType();
     return *registry;
 }
+
+} // end namespace
+

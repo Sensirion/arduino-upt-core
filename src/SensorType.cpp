@@ -1,6 +1,6 @@
 
 #include "SensorType.h"
-
+namespace upt_core{
 const DeviceType SensorType::SCD4X=DeviceTypeRegistry::CreateBleDeviceType("Scd4x");
 const DeviceType SensorType::SFA3X=DeviceTypeRegistry::CreateWiredDeviceType("Sfa3x");
 const DeviceType SensorType::SFA40=DeviceTypeRegistry::CreateWiredDeviceType("Sfa4x");
@@ -23,3 +23,6 @@ const DeviceType SensorType::STCC4=DeviceTypeRegistry::CreateWiredDeviceType("St
 const char *sensorLabel(DeviceType sensorType) {
     return sensorType.data();
 }
+
+} // end namespace
+

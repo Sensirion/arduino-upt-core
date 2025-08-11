@@ -20,7 +20,7 @@
  *      Type, and Sample. See diagram in Sect 2 "BLE Advertisement" in document
  *      linked above
  */
-
+namespace upt_core{
 enum DataType {
     UNDEFINED,
     T_RH_V3,
@@ -94,5 +94,7 @@ struct SampleConfig {
 DataType getDataTypeFromSampleType(uint8_t sampleType);
 
 extern std::map<DataType, SampleConfig> sampleConfigSelector;
+
+} // end namespace
 
 #endif /* BLE_PROTOCOL_H */

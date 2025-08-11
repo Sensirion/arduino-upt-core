@@ -2,6 +2,8 @@
 #define SENSOR_TYPE_H
 #include "DeviceType.h"
 
+namespace upt_core{
+
 /* X stands for any sensor version in a family, ie. SHT4X can be assigned to any
  * sensor in Sensirion's SHT4 series of sensors. */
 struct SensorType {
@@ -24,5 +26,5 @@ struct SensorType {
     static const DeviceType SEN66;
     static const DeviceType STCC4;
 };
-
+} // end namespace
 #endif /* SENSOR_TYPE_H */

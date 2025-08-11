@@ -1,5 +1,7 @@
 #include "SignalType.h"
 
+namespace upt_core{
+
 const char *unitOf(SignalType signalType) {
     switch (signalType) {
     case SignalType::TEMPERATURE_DEGREES_CELSIUS:
@@ -72,3 +74,5 @@ const char *quantityOf(SignalType signalType) {
         return "UNDEFINED";
     }
 }
+
+} // end namespace

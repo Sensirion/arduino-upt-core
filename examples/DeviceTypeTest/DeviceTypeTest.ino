@@ -4,6 +4,8 @@
 #include "BLEGadgetType.h"
 #include "SensorType.h"
 
+using namespace upt_core;
+
 void setup() {
     Serial.begin(115200);
     Serial.println();

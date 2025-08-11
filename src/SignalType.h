@@ -1,6 +1,8 @@
 #ifndef SIGNAL_TYPE_H
 #define SIGNAL_TYPE_H
 
+namespace upt_core{
+
 /**
  * @note RAW VOC and NOX values must be converted to index scale to have any
  * meaning. This is achieved with the Sensirion Gas Index Algorithm: see
@@ -43,5 +45,7 @@ const char *unitOf(SignalType signalType);
  *  e.g. "T" for TEMPERATURE_DEGREES_CELSIUS
  */
 const char *quantityOf(SignalType signalType);
+
+} // end namespace
 
 #endif /* SIGNAL_TYPE_H */
