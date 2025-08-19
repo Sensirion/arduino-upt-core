@@ -17,7 +17,10 @@ struct DataPoint {
 
 
 struct MetaData {
-    DevicePlatform platform = DevicePlatform::UNDEFINED;
+    /// We require a device type that is not added to the registry but that can just be used to
+    /// have a default constructor for Measurements
+    static constexpr DeviceType DEVICE_UNDEFINED{"undefined"};
+
     /**
      * @note deviceID is intended as a unique identifier for sensors within the
      * UPT ecosystem. 64 bits are made available to accomodate full MAC
@@ -36,24 +39,27 @@ struct MetaData {
 };
 
 struct Measurement {
+    
     explicit Measurement(const DeviceType& deviceType): metaData{deviceType}{}
     Measurement(const MetaData& metadata, const SignalType signalType, const DataPoint& dataPoint):
-        metaData{metaData}, signalType{signalType}, dataPoint{dataPoint}{}
-    DataPoint dataPoint;
-    SignalType signalType = SignalType::UNDEFINED;
-    MetaData metaData;
+        metaData{metadata}, signalType{signalType}, dataPoint{dataPoint}{}
+    Measurement():
+        dataPoint{0,0},signalType{SignalType::UNDEFINED},metaData{MetaData::DEVICE_UNDEFINED}{}
+
+    DataPoint dataPoint{0,0};
+    SignalType signalType{SignalType::UNDEFINED};
+    MetaData metaData{MetaData::DEVICE_UNDEFINED};
 };
 
 /**
  * @brief obtain a label for the device platform, eg. "WIRED"
  */
-const char *devicePlatformLabel(DevicePlatform devicePlatform,
-                                DeviceType deviceType);
+const char *devicePlatformLabel(DeviceType deviceType);
 
 /**
  * @brief obtain a label for the device type, eg. "SCD4X"
  */
-const char *deviceLabel(DevicePlatform platform, DeviceType deviceType);
+const char *deviceLabel(DeviceType deviceType);
 
 /**
  * @brief print Measurement.metaData to console via Arduino Serial

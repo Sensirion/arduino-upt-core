@@ -16,6 +16,7 @@
 
 namespace upt_core{
 
+/// Describe how a device communicates
 enum class DevicePlatform: uint8_t {
     UNDEFINED,
     BLE,
@@ -25,13 +26,11 @@ enum class DevicePlatform: uint8_t {
 /// Device type used to identify a device
 using DeviceType = std::string_view;
 
-
 /// Return type for device type query. In case the query is not successful std::null_option is used
 using OptionalDeviceType = std::optional<DeviceType>;
 
 /// Input type for device type alias. In case std::null_option is passed as argument, no alias is added
 using DeviceTypeAlias = std::optional<std::string>;
-
 
 
 /// A registry to define and store device types that are used in the framework
@@ -47,11 +46,11 @@ public:
             DeviceTypeAlias alias;
         };
 
-        // using NO_ALIAS = std::nullopt;
-
+        /// Type of the container that holds the device type data
         using RegistryType = std::vector<const DeviceTypeData*>;
         using Iterator = RegistryType::iterator;
 
+        /// Shorthand to be used when no alias is needed
         static constexpr std::nullopt_t NO_ALIAS = std::nullopt;
 
         /// Create a new device type with the supplied label
@@ -64,8 +63,14 @@ public:
         static DeviceType CreateDeviceType(const std::string& label, const DevicePlatform platform, 
                                                      const DeviceTypeAlias alias);
 
+        /// Shorthand to create a wired device type without alias
+        /// @param label Name of the device
+        /// @return The associated device type object
         static DeviceType CreateWiredDeviceType(const std::string& label);
 
+        /// Shorthand to create a ble device type without alias
+        /// @param label Name of the device
+        /// @return The associated device type object
         static DeviceType CreateBleDeviceType(const std::string& label);
 
         /// Try to fetch a device type
