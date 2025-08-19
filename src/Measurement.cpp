@@ -3,8 +3,8 @@
 
 namespace upt_core{
 
-const char *devicePlatformLabel(DevicePlatform platform,
-                                DeviceType deviceType) {
+const char *devicePlatformLabel(DeviceType deviceType) {
+    auto platform = DeviceTypeRegistry::GetDevicePlatform(deviceType);
     switch (platform) {
     case DevicePlatform::WIRED:
         return "WIRED";
@@ -15,21 +15,20 @@ const char *devicePlatformLabel(DevicePlatform platform,
     }
 }
 
-const char *deviceLabel(DevicePlatform platform, DeviceType deviceType) {
+const char *deviceLabel(DeviceType deviceType) {
     return deviceType.data();
 }
 
 void printMeasurementMetaData(const Measurement &measurement) {
     // Get device and platform descriptive labels
-    const char *platformLbl = devicePlatformLabel(
-        measurement.metaData.platform, measurement.metaData.deviceType);
-    const char *deviceLbl = deviceLabel(measurement.metaData.platform,
-                                        measurement.metaData.deviceType);
+    auto platform = DeviceTypeRegistry::GetDevicePlatform(measurement.metaData.deviceType);
+    const char *platformLbl = devicePlatformLabel(measurement.metaData.deviceType);
+    const char *deviceLbl = deviceLabel(measurement.metaData.deviceType);
 
     Serial.printf("  Metadata:\n");
     Serial.printf("    Platform:\t\t%s\n", platformLbl);
     Serial.printf("    deviceID:\t\t");
-    switch (measurement.metaData.platform) {
+    switch (platform) {
     case DevicePlatform::BLE:
         printMACAddess(arrayifyDeviceID(measurement.metaData.deviceID));
         break;

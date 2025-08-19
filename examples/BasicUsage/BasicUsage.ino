@@ -45,7 +45,6 @@ Measurement createRandomMeasurement() {
 
     // Metadata
     if (p == DevicePlatform::WIRED) { // I2C Sensor
-        measurement.metaData.platform = DevicePlatform::WIRED;
         uint64_t deviceID = 0;
         // Serial No. for i2c sensors typically is a 48-bit value
         for (int i = 0; i < 48; i++) {
@@ -53,7 +52,6 @@ Measurement createRandomMeasurement() {
         }
         measurement.metaData.deviceID = deviceID;
     } else { // BLE Gadget
-        measurement.metaData.platform = DevicePlatform::BLE;
         uint64_t deviceID = 0;
         // MAC address of a BLE device typically is a 64-bit value
         for (int i = 0; i < 64; i++) {
