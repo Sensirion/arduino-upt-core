@@ -10,7 +10,7 @@ on:
 
 jobs:
     Arduino-Checks:
-        uses: sensirion/.github/.github/workflows/upt.arduino.check.yml@update-6
+        uses: sensirion/.github/.github/workflows/upt.arduino.check.yml@main
         with:
             expect-arduino-examples: true
             lint-lib-manager-check: update
