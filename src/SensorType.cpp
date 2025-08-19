@@ -1,6 +1,6 @@
 
 #include "SensorType.h"
-namespace upt_core{
+namespace sensirion::upt::core{
 
 const char *sensorLabel(DeviceType sensorType) {
     return sensorType.data();

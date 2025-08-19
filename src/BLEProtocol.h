@@ -20,7 +20,7 @@
  *      Type, and Sample. See diagram in Sect 2 "BLE Advertisement" in document
  *      linked above
  */
-namespace upt_core{
+namespace sensirion::upt::core{
 enum DataType {
     UNDEFINED,
     T_RH_V3,

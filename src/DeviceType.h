@@ -14,7 +14,7 @@
 #include <vector>
 #include <optional>
 
-namespace upt_core{
+namespace sensirion::upt::core{
 
 /// Describe how a device communicates
 enum class DevicePlatform: uint8_t {
@@ -95,6 +95,6 @@ public:
 
 };
 
-} // namespace upt_core
+} // namespace sensirion::upt::core
 
 #endif //_DEVICE_TYPE_H_

@@ -4,7 +4,7 @@
 #include "BLEGadgetType.h"
 #include "SensorType.h"
 
-using namespace upt_core;
+using namespace sensirion::upt::core;
 
 void setup() {
     Serial.begin(115200);

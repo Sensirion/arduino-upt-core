@@ -1,6 +1,6 @@
 #include "BLEProtocol.h"
 
-namespace upt_core{
+namespace sensirion::upt::core{
 std::map<DataType, SampleConfig> sampleConfigSelector = {
     {T_RH_V3,
      {.dataType = DataType::T_RH_V3,

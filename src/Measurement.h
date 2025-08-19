@@ -8,7 +8,7 @@
 #include <string>
 #include <DeviceType.h>
 
-namespace upt_core{
+namespace sensirion::upt::core{
 
 struct DataPoint {
     unsigned long t_offset = 0;
