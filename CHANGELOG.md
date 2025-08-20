@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.7.0] - 2025-08-20
+
+### Changed
+
+- Add namespaces
+- Add extensible DeviceType instead of Enum
+- Various cleanups
+
 ## [0.6.0] - 2025-06-25
 
 ### Added
