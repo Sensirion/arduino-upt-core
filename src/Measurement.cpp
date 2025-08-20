@@ -1,7 +1,7 @@
 #include "Measurement.h"
 #include "DeviceType.h"
 
-namespace upt_core{
+namespace sensirion::upt::core{
 
 const char *devicePlatformLabel(DeviceType deviceType) {
     auto platform = DeviceTypeRegistry::GetDevicePlatform(deviceType);

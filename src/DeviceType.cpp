@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "SensorType.h"
 
-namespace upt_core{
+namespace sensirion::upt::core{
 
 /// Helper function to search the registry
 /// @param key key to search for

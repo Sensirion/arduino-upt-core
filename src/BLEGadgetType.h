@@ -3,7 +3,7 @@
 
 #include "DeviceType.h"
 
-namespace upt_core{
+namespace sensirion::upt::core{
 /// List of supported Sensirion BLE Gadgets
 ///
 /// Using a struct allows to access the Device Types 

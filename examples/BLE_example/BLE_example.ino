@@ -11,7 +11,7 @@ https://github.com/Sensirion/arduino-ble-gadget/blob/master/documents/00-Sensiri
 #include "Arduino.h"
 #include "Sensirion_UPT_Core.h"
 
-using namespace upt_core;
+using namespace sensirion::upt::core;
 
 static const uint16_t SENSIRION_BLE_COMPANY_ID = 54534; // 0xD506
 std::string generateBLEAdvertisement(DataType dataType);

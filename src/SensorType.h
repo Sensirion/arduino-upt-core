@@ -2,7 +2,7 @@
 #define SENSOR_TYPE_H
 #include "DeviceType.h"
 
-namespace upt_core{
+namespace sensirion::upt::core{
 
 /* X stands for any sensor version in a family, ie. SHT4X can be assigned to any
  * sensor in Sensirion's SHT4 series of sensors. */

@@ -1,7 +1,7 @@
 #ifndef SIGNAL_TYPE_H
 #define SIGNAL_TYPE_H
 
-namespace upt_core{
+namespace sensirion::upt::core{
 
 /**
  * @note RAW VOC and NOX values must be converted to index scale to have any

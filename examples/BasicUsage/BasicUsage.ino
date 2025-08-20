@@ -7,7 +7,7 @@ typical instances one might encounter using the Unified Prototyping Toolkit.
 #include "Arduino.h"
 #include "Sensirion_UPT_Core.h"
 
-using namespace upt_core;
+using namespace sensirion::upt::core;
 
 Measurement createRandomMeasurement();
 Measurement dummyMeasurement{createRandomMeasurement()};
