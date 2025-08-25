@@ -28,7 +28,7 @@ void loop() {
     std::string bleDevAlias("S");
     auto wiredDevType = DeviceTypeRegistry::GetDeviceType(wiredDevLabel)
         .value_or(DeviceType("undefined"));
-    auto wired = DeviceTypeRegistry::GetDevicePlatform(wiredDevType);
+    [[maybe_unused]]auto wired = DeviceTypeRegistry::GetDevicePlatform(wiredDevType);
     Serial.println(wiredDevLabel.c_str());
     Serial.println(deviceLabel(wiredDevType));
     Serial.println(devicePlatformLabel(wiredDevType));
@@ -39,7 +39,7 @@ void loop() {
         .value_or(DeviceType("undefined_ble_type"));
 
     Serial.printf("type retrieved with alias matches original: %i\n", bleDevType==bleDevType2);
-    auto ble = DeviceTypeRegistry::GetDevicePlatform(bleDevType2);
+    [[maybe_unused]]auto ble = DeviceTypeRegistry::GetDevicePlatform(bleDevType2);
 
     Serial.println(deviceLabel(bleDevType2));
     Serial.println(devicePlatformLabel(bleDevType));
