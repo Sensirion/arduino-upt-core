@@ -44,11 +44,12 @@ struct Measurement {
     Measurement(const MetaData& metadata, const SignalType signalType, const DataPoint& dataPoint):
         metaData{metadata}, signalType{signalType}, dataPoint{dataPoint}{}
     Measurement():
-        dataPoint{0,0},signalType{SignalType::UNDEFINED},metaData{MetaData::DEVICE_UNDEFINED}{}
+        metaData{MetaData::DEVICE_UNDEFINED}, signalType{SignalType::UNDEFINED}, dataPoint{0,0}{}
 
-    DataPoint dataPoint{0,0};
-    SignalType signalType{SignalType::UNDEFINED};
     MetaData metaData{MetaData::DEVICE_UNDEFINED};
+    SignalType signalType{SignalType::UNDEFINED};
+    DataPoint dataPoint{0,0};
+    
 };
 
 /**
