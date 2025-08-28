@@ -93,7 +93,18 @@ struct SampleConfig {
 
 DataType getDataTypeFromSampleType(uint8_t sampleType);
 
-extern std::map<DataType, SampleConfig> sampleConfigSelector;
+
+using SampleConfigMapping = std::map<DataType, SampleConfig>;
+
+
+/// Get a reference to the mapping table that defines the mapping from
+/// DataType to SampleConfig
+const SampleConfigMapping& GetSampleConfigurationMapping();
+
+/// Read a specific SampleConfiguration for a specifed data type
+/// @param dataType 
+/// @return The mapped SampleConig entry
+SampleConfig GetSampleConfiguration(DataType dataType);
 
 } // end namespace
 
