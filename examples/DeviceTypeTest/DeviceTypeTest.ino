@@ -23,8 +23,8 @@ void loop() {
     Serial.println("Lookup and compare device types and platforms");
     Serial.println("=============================================\n");
     
-    std::string bleDevLabel{BLEGadgetType::BLE_DIY_GADGET()};
-    std::string wiredDevLabel{SensorType::SAV45()};
+    std::string bleDevLabel{BLE_DIY_GADGET()};
+    std::string wiredDevLabel{SAV45()};
     std::string bleDevAlias("S");
     auto wiredDevType = DeviceTypeRegistry::GetDeviceType(wiredDevLabel)
         .value_or(DeviceType("undefined"));
