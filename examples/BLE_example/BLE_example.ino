@@ -39,12 +39,12 @@ void loop() {
     decodeAndPrintBLEAdvertisement(data);
 
     Serial.println();
-    delay(5000);
+    delay(2000);
 }
 
 std::string generateBLEAdvertisement(DataType dataType) {
 
-    SampleConfig sampleConfig = sampleConfigSelector[dataType];
+    SampleConfig sampleConfig{GetSampleConfiguration(dataType)};
 
     // Build ManufacturerData for a dummy measurement
     std::string data;
@@ -134,7 +134,7 @@ void decodeAndPrintBLEAdvertisement(const std::string &data) {
 
     DataType decodedDataType =
         getDataTypeFromSampleType(static_cast<uint8_t>(data[3]));
-    SampleConfig sampleConfig = sampleConfigSelector[decodedDataType];
+    SampleConfig sampleConfig{GetSampleConfiguration(decodedDataType)};
 
     // Extract data piece-by-piece, using SampleConfig
     for (auto it = sampleConfig.sampleSlots.begin();
