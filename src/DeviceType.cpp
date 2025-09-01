@@ -1,7 +1,6 @@
 #include "DeviceType.h"
 #include <algorithm>
 #include "Arduino.h"
-#include "SensorType.h"
 
 namespace sensirion::upt::core{
 
@@ -89,6 +88,11 @@ DeviceTypeRegistry::deviceTypeRegistry(){
     // create a new registry on the heap; this will never be reclaimed!
     static RegistryType* registry = new RegistryType();
     return *registry;
+}
+
+
+const char *getDeviceLabel(DeviceType deviceType) {
+    return deviceType.data();
 }
 
 } // end namespace
