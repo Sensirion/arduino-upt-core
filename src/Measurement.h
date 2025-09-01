@@ -1,8 +1,6 @@
 #ifndef _MEASUREMENT_H_
 #define _MEASUREMENT_H_
 
-#include "BLEGadgetType.h"
-#include "SensorType.h"
 #include "SignalType.h"
 #include <Arduino.h>
 #include <string>
