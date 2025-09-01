@@ -1,8 +1,6 @@
 #include "Arduino.h"
 #include "Sensirion_UPT_Core.h"
 #include "DeviceType.h"
-#include "BLEGadgetType.h"
-#include "SensorType.h"
 
 using namespace sensirion::upt::core;
 
@@ -24,7 +22,7 @@ void loop() {
     Serial.println("=============================================\n");
     
     std::string bleDevLabel{BLE_DIY_GADGET()};
-    std::string wiredDevLabel{SAV45()};
+    std::string wiredDevLabel{SHT4X()};
     std::string bleDevAlias("S");
     auto wiredDevType = DeviceTypeRegistry::GetDeviceType(wiredDevLabel)
         .value_or(DeviceType("undefined"));
