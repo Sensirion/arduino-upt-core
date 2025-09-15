@@ -73,14 +73,11 @@ float decodeVelocityV1(uint16_t rawValue);
 void emplaceRawValue(std::string &data, uint8_t offset, uint16_t rawValue);
 uint16_t getRawValue(const std::string &data, uint8_t offset);
 
-using EncodingFunction = std::function<uint16_t(float)>;
-using DecodingFunction = std::function<float(uint16_t)>;
-
 struct SampleSlot {
     SignalType signalType{SignalType::UNDEFINED};
     size_t offset{0};
-    EncodingFunction encodingFunction{};
-    DecodingFunction decodingFunction{};
+    uint16_t (*encodingFunction)(float value);
+    float (*decodingFunction)(uint16_t rawValue);
 };
 
 // Sample configuration data
