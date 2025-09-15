@@ -73,22 +73,25 @@ float decodeVelocityV1(uint16_t rawValue);
 void emplaceRawValue(std::string &data, uint8_t offset, uint16_t rawValue);
 uint16_t getRawValue(const std::string &data, uint8_t offset);
 
+using EncodingFunction = std::function<uint16_t(float)>;
+using DecodingFunction = std::function<float(uint16_t)>;
+
 struct SampleSlot {
-    SignalType signalType;
-    size_t offset;
-    uint16_t (*encodingFunction)(float value);
-    float (*decodingFunction)(uint16_t rawValue);
+    SignalType signalType{SignalType::UNDEFINED};
+    size_t offset{0};
+    EncodingFunction encodingFunction{};
+    DecodingFunction decodingFunction{};
 };
 
 // Sample configuration data
 struct SampleConfig {
-    DataType dataType;
-    uint16_t downloadType;
-    uint8_t sampleType; // Maps 1-to-1 to DataType
-    size_t sampleSizeBytes;
-    size_t sampleCountPerPacket;
-    uint8_t sensirionAdvertisementSampleType;
-    std::map<SignalType, SampleSlot> sampleSlots;
+    DataType dataType{DataType::UNDEFINED};
+    uint16_t downloadType{0};
+    uint8_t sampleType{0}; // Maps 1-to-1 to DataType
+    size_t sampleSizeBytes{0};
+    size_t sampleCountPerPacket{0};
+    uint8_t sensirionAdvertisementSampleType{0};
+    std::map<SignalType, SampleSlot> sampleSlots{};
 };
 
 DataType getDataTypeFromSampleType(uint8_t sampleType);
