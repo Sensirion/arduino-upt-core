@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.9.4] - 2025-09-15
+
+### Added
+- Provide an initalization function for the BLE sample info
+  data structure.
+### Fixed
+- Make call operator of FunctionWrapper const
+
 ## [0.9.3] - 2025-09-15
 
 ### Fixed
