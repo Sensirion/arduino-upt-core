@@ -69,6 +69,33 @@ float decodeVelocityV1(uint16_t rawValue);
 /* Declare new decoding function here, define in
  * BLEProtocol.cpp */
 
+/// Helper template to prevent access to uninitialized function pointers
+/// @tparam retT return type of the wrapped function pointer
+/// @tparam argT argument type of the wrapped function pointer
+template< typename retT, typename argT>
+struct FunctionWrapper{
+    using wrappedT = retT (*)(argT arg);
+
+    FunctionWrapper(): function{nullptr}{}
+    FunctionWrapper(wrappedT ptr):function{ptr}{}
+    retT operator()(argT arg){
+        if (function != nullptr){
+            return function(arg);
+        }
+        return static_cast<retT>(0);
+    }
+    
+    operator bool() const{
+        return function != nullptr;
+    }
+
+    private:
+        wrappedT function;
+};
+
+using EncodingFunction = FunctionWrapper<u_int16_t,float>;
+using DecodingFunction = FunctionWrapper<float,uint16_t>;
+
 // Data manipulators
 void emplaceRawValue(std::string &data, uint8_t offset, uint16_t rawValue);
 uint16_t getRawValue(const std::string &data, uint8_t offset);
@@ -76,8 +103,8 @@ uint16_t getRawValue(const std::string &data, uint8_t offset);
 struct SampleSlot {
     SignalType signalType{SignalType::UNDEFINED};
     size_t offset{0};
-    uint16_t (*encodingFunction)(float value);
-    float (*decodingFunction)(uint16_t rawValue);
+    EncodingFunction encodingFunction;
+    DecodingFunction decodingFunction;
 };
 
 // Sample configuration data

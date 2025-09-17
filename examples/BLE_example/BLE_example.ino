@@ -145,12 +145,19 @@ void decodeAndPrintBLEAdvertisement(const std::string &data) {
         measurement.signalType = it->first;
 
         measurement.dataPoint.t_offset = millis();
-        uint16_t rawValue = it->second.decodingFunction(
+        auto decodingFunction = it->second.decodingFunction;
+        if (!decodingFunction ){
+            Serial.println("no decoding function defined");
+            continue;
+        
+        }
+        uint16_t rawValue = decodingFunction(
             getRawValue(data, 6 + it->second.offset));
         measurement.dataPoint.value = static_cast<float>(rawValue);
 
         /* MetaData skipped in this example as information for fields deviceID
          * and deviceType are not included in ManufacturerData */
         printMeasurementWithoutMetaData(measurement);
+        
     }
 }

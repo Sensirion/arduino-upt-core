@@ -1,5 +1,6 @@
 #include "DeviceType.h"
 #include "Measurement.h"
+#include "BLEProtocol.h"
 
 #include <unity.h>
 
@@ -42,6 +43,12 @@ void test_device_label() {
     TEST_ASSERT_TRUE(label == "Sht4x");
 }
 
+void test_get_sample_configuration() {
+    auto sampleConfiguration = GetSampleConfiguration(DataType::T_RH_V3);
+    TEST_ASSERT_TRUE(sampleConfiguration.sampleSlots[SignalType::TEMPERATURE_DEGREES_CELSIUS].encodingFunction);
+    TEST_ASSERT_TRUE(sampleConfiguration.sampleSlots[SignalType::RELATIVE_HUMIDITY_PERCENTAGE].encodingFunction);
+}
+
 void setup() {
     UNITY_BEGIN();
 
@@ -50,10 +57,12 @@ void setup() {
     RUN_TEST(test_get_wired_platform);
     RUN_TEST(test_get_ble_platform);
     RUN_TEST(test_device_label);
+    RUN_TEST(test_get_sample_configuration);
 
     UNITY_END();
 }
 
+[[maybe_unused]]
 void loop() {
     // not used
 }
