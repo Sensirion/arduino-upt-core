@@ -78,7 +78,7 @@ struct FunctionWrapper{
 
     FunctionWrapper(): function{nullptr}{}
     FunctionWrapper(wrappedT ptr):function{ptr}{}
-    retT operator()(argT arg){
+    retT operator()(argT arg) const {
         if (function != nullptr){
             return function(arg);
         }
@@ -122,6 +122,14 @@ DataType getDataTypeFromSampleType(uint8_t sampleType);
 
 
 using SampleConfigMapping = std::map<DataType, SampleConfig>;
+
+
+/// Initializes the data structures that defines the layout of
+/// BLE samples from different gadgets
+///
+/// If you need this data structure, call this function in the
+/// setup of your arduino application.
+void InitSampleConfigurationMapping();
 
 
 /// Get a reference to the mapping table that defines the mapping from

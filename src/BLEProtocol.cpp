@@ -582,4 +582,10 @@ DataType getDataTypeFromSampleType(uint8_t sampleType) {
     }
     return DataType::UNDEFINED;
 }
+
+void InitSampleConfigurationMapping(){
+  [[maybe_unused]]
+  auto mapping = GetSampleConfigurationMapping();
+}
+
 } // end namespace
