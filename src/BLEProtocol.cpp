@@ -576,7 +576,7 @@ DataType getDataTypeFromSampleType(uint8_t sampleType) {
     auto mapping = GetSampleConfigurationMapping();
     for (const auto &it : mapping){
    
-        if (it.second.dataType == sampleType) {
+        if (it.second.sampleType == sampleType) {
             return it.first;
         }
     }
