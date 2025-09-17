@@ -78,7 +78,7 @@ struct FunctionWrapper{
 
     FunctionWrapper(): function{nullptr}{}
     FunctionWrapper(wrappedT ptr):function{ptr}{}
-    retT operator()(argT arg){
+    retT operator()(argT arg) const {
         if (function != nullptr){
             return function(arg);
         }
