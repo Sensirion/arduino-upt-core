@@ -40,7 +40,7 @@ void test_device_label() {
     DeviceType wired_device_type = SHT4X();
     std::string label = deviceLabel(wired_device_type);
 
-    TEST_ASSERT_TRUE(label == "Sht4x");
+    TEST_ASSERT_TRUE(label == "SHT4x");
 }
 
 void test_get_sample_configuration() {

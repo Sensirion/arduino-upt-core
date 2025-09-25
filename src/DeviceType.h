@@ -104,58 +104,58 @@ const char *getDeviceLabel(DeviceType deviceType);
 
 // device types representing sensors
 inline const DeviceType SCD4X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Scd4x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SCD4x");
 }
 inline const DeviceType SFA3X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sfa3x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SFA3x");
 }
 inline const DeviceType SFA40(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sfa4x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SFA4x");
 }
 inline const DeviceType SVM4X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Svm4x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SVM4x");
 }
 inline const DeviceType SVM41(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Svm41");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SVM41");
 }
 inline const DeviceType SHT4X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sht4x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SHT4x");
 }
 inline const DeviceType SAV45(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sav45");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SAV45");
 }
 inline const DeviceType SEN5X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sen5x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SEN5x");
 }
 inline const DeviceType SEN50(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sen50");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SEN50");
 }
 inline const DeviceType SEN54(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sen54");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SEN54");
 }
 inline const DeviceType SEN55(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sen55");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SEN55");
 }
 inline const DeviceType SCD30(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Scd30");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SCD30");
 }
 inline const DeviceType STC3X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Stc3x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("STC3x");
 }
 inline const DeviceType STC31(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Stc31");
+    return DeviceTypeRegistry::CreateWiredDeviceType("STC31");
 }
 inline const DeviceType SGP4X(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sgp4x");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SGP4x");
 }
 inline const DeviceType SGP41(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sgp41");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SGP41");
 };
 inline const DeviceType SEN66(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Sen66");
+    return DeviceTypeRegistry::CreateWiredDeviceType("SEN66");
 }
 inline const DeviceType STCC4(){
-    return DeviceTypeRegistry::CreateWiredDeviceType("Stcc4");
+    return DeviceTypeRegistry::CreateWiredDeviceType("STCC4");
 }
 
 // Device types representing BLE Gadgets
