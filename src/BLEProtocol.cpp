@@ -551,7 +551,7 @@ uint16_t encodeVelocityV1(float value) {
 }
 
 uint16_t encodeH2ConcentrationV1(float value) {
-    return static_cast<uint16_t>(((value - 16'384) / 32'768) * 50);
+    return static_cast<uint16_t>((value * 32768 / 40.0f) + 16384 + 0.5f);
 }
 /* Define new encoding function here */
 
@@ -586,7 +586,7 @@ float decodeVelocityV1(uint16_t rawValue) {
 }
 
 float decodeH2ConcentrationV1(uint16_t rawValue) {
-    return ((static_cast<float>(rawValue) * 32'768) / 40) + 16'384;
+    return ((static_cast<float>(rawValue) - 16384) / 32768) * 40.0f;
 }
 /* Define new decoding function here */
 
