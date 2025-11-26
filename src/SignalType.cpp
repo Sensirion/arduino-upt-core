@@ -33,7 +33,10 @@ const char *unitOf(SignalType signalType) {
     case SignalType::NOX_INDEX:
         return ""; // NOX index is a unit free measure
     case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
+    case SignalType::H2_CONCENTRATION_VOLUME_PERCENTAGE:
         return "vol%";
+    case SignalType::PRESSURE_MBAR:
+        return "mbar";
     default:
         return "UNDEFINED";
     }
@@ -70,6 +73,10 @@ const char *quantityOf(SignalType signalType) {
         return "NOX INDEX";
     case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
         return "GAS CONC.";
+    case SignalType::H2_CONCENTRATION_VOLUME_PERCENTAGE:
+        return "H2 CONC.";
+    case SignalType::PRESSURE_MBAR:
+        return "PRESSURE";
     default:
         return "UNDEFINED";
     }

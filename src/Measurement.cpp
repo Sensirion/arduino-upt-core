@@ -66,6 +66,8 @@ void printMeasurementWithoutMetaData(const Measurement &measurement) {
     case SignalType::VOC_INDEX:
     case SignalType::NOX_INDEX:
     case SignalType::GAS_CONCENTRATION_VOLUME_PERCENTAGE:
+    case SignalType::H2_CONCENTRATION_VOLUME_PERCENTAGE:
+    case SignalType::PRESSURE_MBAR:
         Serial.printf("%i\n", static_cast<int>(measurement.dataPoint.value));
         break;
     default:

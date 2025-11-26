@@ -38,6 +38,7 @@ enum DataType {
     T_RH_CO2_PM25_V2,
     T_RH_VOC_PM25_V2,
     T_RH_CO2_VOC_PM25_HCHO_V2,
+    T_RH_H2_P,
     PM10_PM25_PM40_PM100,
     CO2_DataType,
     AV_T,
@@ -54,6 +55,7 @@ uint16_t encodePM2p5V1(float value);
 uint16_t encodePMV2(float value);
 uint16_t encodeHCHOV1(float value);
 uint16_t encodeVelocityV1(float value);
+uint16_t encodeH2ConcentrationV1(float value);
 /* Declare new encoding function here, define in
  * BLEProtocol.cpp */
 
@@ -66,6 +68,7 @@ float decodePM2p5V1(uint16_t rawValue);
 float decodePMV2(uint16_t rawValue);
 float decodeHCHOV1(uint16_t rawValue);
 float decodeVelocityV1(uint16_t rawValue);
+float decodeH2ConcentrationV1(uint16_t rawValue);
 /* Declare new decoding function here, define in
  * BLEProtocol.cpp */
 
