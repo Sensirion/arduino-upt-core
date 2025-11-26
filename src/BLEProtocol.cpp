@@ -473,7 +473,35 @@ const SampleConfigMapping& GetSampleConfigurationMapping(){
                         {.signalType = SignalType::TEMPERATURE_DEGREES_CELSIUS,
                           .offset = 2,
                           .encodingFunction = &encodeTemperatureV1,
-                          .decodingFunction = &decodeTemperatureV1}}}}}
+                 .decodingFunction = &decodeTemperatureV1}}}}},
+        {T_RH_H2_P,
+         {.dataType = DataType::T_RH_H2_P,
+          .downloadType = 39,
+          .sampleType = 40,
+          .sampleSizeBytes = 8,
+          .sampleCountPerPacket = 2,
+          .sensirionAdvertisementSampleType = 0,
+          .sampleSlots =
+              {{SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                {.signalType = SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                 .offset = 0,
+                 .encodingFunction = &encodeTemperatureV1,
+                 .decodingFunction = &decodeTemperatureV1}},
+               {SignalType::RELATIVE_HUMIDITY_PERCENTAGE,
+                {.signalType = SignalType::RELATIVE_HUMIDITY_PERCENTAGE,
+                 .offset = 2,
+                 .encodingFunction = &encodeHumidityV1,
+                 .decodingFunction = &decodeHumidityV1}},
+               {SignalType::H2_CONCENTRATION_VOLUME_PERCENTAGE,
+                {.signalType = SignalType::H2_CONCENTRATION_VOLUME_PERCENTAGE,
+                 .offset = 4,
+                 .encodingFunction = &encodeH2ConcentrationV1,
+                 .decodingFunction = &decodeH2ConcentrationV1}},
+               {SignalType::PRESSURE_MBAR,
+                {.signalType = SignalType::PRESSURE_MBAR,
+                 .offset = 6,
+                 .encodingFunction = &encodeSimple,
+                 .decodingFunction = &decodeSimple}}}}},
       /* Add new SampleConfigs here */
   };
   return sampleConfigMapping;
@@ -521,6 +549,10 @@ uint16_t encodeHCHOV1(float value) {
 uint16_t encodeVelocityV1(float value) {
     return static_cast<uint16_t>((value / 1024) * 65535 + 0.5f);
 }
+
+uint16_t encodeH2ConcentrationV1(float value) {
+    return static_cast<uint16_t>(((value - 16'384) / 32'768) * 50);
+}
 /* Define new encoding function here */
 
 float decodeSimple(uint16_t rawValue) { return static_cast<float>(rawValue); }
@@ -551,6 +583,10 @@ float decodeHCHOV1(uint16_t rawValue) {
 
 float decodeVelocityV1(uint16_t rawValue) {
     return rawValue * 1024.0 / 65535.0;
+}
+
+float decodeH2ConcentrationV1(uint16_t rawValue) {
+    return ((static_cast<float>(rawValue) * 32'768) / 40) + 16'384;
 }
 /* Define new decoding function here */
 
