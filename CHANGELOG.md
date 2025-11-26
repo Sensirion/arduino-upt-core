@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.1.1] - 2025-11-26
+### Fixed
+- Corrected H2 concentration encoding/decoding functions
+
 ## [1.1.0] - 2025-11-26
 ### Added
 - H2 concentration signal 
