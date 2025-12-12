@@ -12,15 +12,15 @@
  * for the general BLE sample transmission strategy.
  *
  * Common definitions:
- *  --  DataType: identifies the structure & contents of ManufacturerData field
- *      in BLE Advertisement
- *  --  Sample: set of measurements, typically retrived simultaneously from a
- *      sensor. Made up of several SampleSlots.
+ *  --  DataType: identifies the structure and contents of ManufacturerData
+ *                field in BLE Advertisement
+ *  --  Sample: set of measurements, typically retrieved simultaneously from a
+ *              sensor. Made up of several SampleSlots.
  *  --  Data: array of bytes containing the Company ID, Sample Adv. Type, Sample
- *      Type, and Sample. See diagram in Sect 2 "BLE Advertisement" in document
- *      linked above
+ *            Type, and Sample. See the diagram in Sect 2 "BLE Advertisement"
+ *            in the document linked above
  */
-namespace sensirion::upt::core{
+namespace sensirion::upt::core {
 enum DataType {
     UNDEFINED,
     T_RH_V3,
@@ -42,8 +42,8 @@ enum DataType {
     PM10_PM25_PM40_PM100,
     CO2_DataType,
     AV_T,
-    /* Add new DataType here. Don't forget to add corresponding
-    SampleConfig in BLEProtocol.cpp */
+    /* Add new DataType here. Remember to add corresponding
+     * SampleConfig in BLEProtocol.cpp */
 };
 
 // Encoding functions
@@ -56,8 +56,7 @@ uint16_t encodePMV2(float value);
 uint16_t encodeHCHOV1(float value);
 uint16_t encodeVelocityV1(float value);
 uint16_t encodeH2ConcentrationV1(float value);
-/* Declare new encoding function here, define in
- * BLEProtocol.cpp */
+/* Declare new encoding functions here, define in BLEProtocol.cpp */
 
 // Decoding functions
 float decodeSimple(uint16_t rawValue);
@@ -69,35 +68,34 @@ float decodePMV2(uint16_t rawValue);
 float decodeHCHOV1(uint16_t rawValue);
 float decodeVelocityV1(uint16_t rawValue);
 float decodeH2ConcentrationV1(uint16_t rawValue);
-/* Declare new decoding function here, define in
- * BLEProtocol.cpp */
+/* Declare new decoding functions here, define in BLEProtocol.cpp */
 
 /// Helper template to prevent access to uninitialized function pointers
 /// @tparam retT return type of the wrapped function pointer
 /// @tparam argT argument type of the wrapped function pointer
-template< typename retT, typename argT>
-struct FunctionWrapper{
+template <typename retT, typename argT> struct FunctionWrapper {
     using wrappedT = retT (*)(argT arg);
 
-    FunctionWrapper(): function{nullptr}{}
-    FunctionWrapper(wrappedT ptr):function{ptr}{}
+    FunctionWrapper() : function{nullptr} {}
+    // Intentionally non-explicit to allow convenient initialization from
+    // function pointers
+    FunctionWrapper(const wrappedT ptr) // NOLINT(google-explicit-constructor)
+        : function{ptr} {}
     retT operator()(argT arg) const {
-        if (function != nullptr){
+        if (function != nullptr) {
             return function(arg);
         }
         return static_cast<retT>(0);
     }
-    
-    operator bool() const{
-        return function != nullptr;
-    }
 
-    private:
-        wrappedT function;
+    explicit operator bool() const { return function != nullptr; }
+
+  private:
+    wrappedT function;
 };
 
-using EncodingFunction = FunctionWrapper<u_int16_t,float>;
-using DecodingFunction = FunctionWrapper<float,uint16_t>;
+using EncodingFunction = FunctionWrapper<uint16_t, float>;
+using DecodingFunction = FunctionWrapper<float, uint16_t>;
 
 // Data manipulators
 void emplaceRawValue(std::string &data, uint8_t offset, uint16_t rawValue);
@@ -123,27 +121,24 @@ struct SampleConfig {
 
 DataType getDataTypeFromSampleType(uint8_t sampleType);
 
-
 using SampleConfigMapping = std::map<DataType, SampleConfig>;
 
-
-/// Initializes the data structures that defines the layout of
+/// Initializes the data structures that define the layout of
 /// BLE samples from different gadgets
 ///
 /// If you need this data structure, call this function in the
 /// setup of your arduino application.
 void InitSampleConfigurationMapping();
 
-
 /// Get a reference to the mapping table that defines the mapping from
 /// DataType to SampleConfig
-const SampleConfigMapping& GetSampleConfigurationMapping();
+const SampleConfigMapping &GetSampleConfigurationMapping();
 
-/// Read a specific SampleConfiguration for a specifed data type
-/// @param dataType 
-/// @return The mapped SampleConig entry
+/// Read a specific SampleConfiguration for a specified data type
+/// @param dataType
+/// @return The mapped SampleConfig entry
 SampleConfig GetSampleConfiguration(DataType dataType);
 
-} // end namespace
+} // namespace sensirion::upt::core
 
 #endif /* BLE_PROTOCOL_H */

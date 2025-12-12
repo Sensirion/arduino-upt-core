@@ -1,7 +1,7 @@
 #ifndef SIGNAL_TYPE_H
 #define SIGNAL_TYPE_H
 
-namespace sensirion::upt::core{
+namespace sensirion::upt::core {
 
 /**
  * @note RAW VOC and NOX values must be converted to index scale to have any
@@ -48,6 +48,6 @@ const char *unitOf(SignalType signalType);
  */
 const char *quantityOf(SignalType signalType);
 
-} // end namespace
+} // namespace sensirion::upt::core
 
 #endif /* SIGNAL_TYPE_H */

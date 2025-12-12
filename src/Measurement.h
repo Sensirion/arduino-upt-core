@@ -3,20 +3,19 @@
 
 #include "SignalType.h"
 #include <Arduino.h>
-#include <string>
 #include <DeviceType.h>
+#include <string>
 
-namespace sensirion::upt::core{
+namespace sensirion::upt::core {
 
 struct DataPoint {
     unsigned long t_offset = 0;
     float value = 0;
 };
 
-
 struct MetaData {
-    /// We require a device type that is not added to the registry but that can just be used to
-    /// have a default constructor for Measurements
+    /// We require a device type that is not added to the registry but that can
+    /// just be used to have a default constructor for Measurements
     static constexpr DeviceType DEVICE_UNDEFINED{"undefined"};
 
     /**
@@ -33,21 +32,22 @@ struct MetaData {
     uint64_t deviceID = 0;
     DeviceType deviceType;
 
-    explicit MetaData(const DeviceType& deviceType) : deviceType{deviceType} {};
+    explicit MetaData(const DeviceType &deviceType) : deviceType{deviceType} {};
 };
 
 struct Measurement {
-    
-    explicit Measurement(const DeviceType& deviceType): metaData{deviceType}{}
-    Measurement(const MetaData& metadata, const SignalType signalType, const DataPoint& dataPoint):
-        metaData{metadata}, signalType{signalType}, dataPoint{dataPoint}{}
-    Measurement():
-        metaData{MetaData::DEVICE_UNDEFINED}, signalType{SignalType::UNDEFINED}, dataPoint{0,0}{}
+
+    explicit Measurement(const DeviceType &deviceType) : metaData{deviceType} {}
+    Measurement(const MetaData &metadata, const SignalType signalType,
+                const DataPoint &dataPoint)
+        : metaData{metadata}, signalType{signalType}, dataPoint{dataPoint} {}
+    Measurement()
+        : metaData{MetaData::DEVICE_UNDEFINED},
+          signalType{SignalType::UNDEFINED}, dataPoint{0, 0} {}
 
     MetaData metaData{MetaData::DEVICE_UNDEFINED};
     SignalType signalType{SignalType::UNDEFINED};
-    DataPoint dataPoint{0,0};
-    
+    DataPoint dataPoint{0, 0};
 };
 
 /**
@@ -80,6 +80,6 @@ void printMeasurement(const Measurement &measurement);
 std::string arrayifyDeviceID(uint64_t deviceID);
 void printMACAddess(const std::string &macAddress);
 
-} // end namespace
+} // namespace sensirion::upt::core
 
 #endif /* _MEASUREMENT_H_ */
