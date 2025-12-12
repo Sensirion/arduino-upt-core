@@ -1,6 +1,6 @@
 #include "SignalType.h"
 
-namespace sensirion::upt::core{
+namespace sensirion::upt::core {
 
 const char *unitOf(SignalType signalType) {
     switch (signalType) {
@@ -82,4 +82,4 @@ const char *quantityOf(SignalType signalType) {
     }
 }
 
-} // end namespace
+} // namespace sensirion::upt::core

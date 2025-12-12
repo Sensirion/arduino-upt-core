@@ -1,7 +1,7 @@
 #include "Measurement.h"
 #include "DeviceType.h"
 
-namespace sensirion::upt::core{
+namespace sensirion::upt::core {
 
 const char *devicePlatformLabel(DeviceType deviceType) {
     auto platform = DeviceTypeRegistry::GetDevicePlatform(deviceType);
@@ -15,14 +15,14 @@ const char *devicePlatformLabel(DeviceType deviceType) {
     }
 }
 
-const char *deviceLabel(DeviceType deviceType) {
-    return deviceType.data();
-}
+const char *deviceLabel(DeviceType deviceType) { return deviceType.data(); }
 
 void printMeasurementMetaData(const Measurement &measurement) {
     // Get device and platform descriptive labels
-    auto platform = DeviceTypeRegistry::GetDevicePlatform(measurement.metaData.deviceType);
-    const char *platformLbl = devicePlatformLabel(measurement.metaData.deviceType);
+    auto platform =
+        DeviceTypeRegistry::GetDevicePlatform(measurement.metaData.deviceType);
+    const char *platformLbl =
+        devicePlatformLabel(measurement.metaData.deviceType);
     const char *deviceLbl = deviceLabel(measurement.metaData.deviceType);
 
     Serial.printf("  Metadata:\n");
@@ -104,4 +104,4 @@ void printMACAddess(const std::string &macAddress) {
     Serial.printf("%X", macAddress[5]);
 }
 
-} // end namespace
+} // namespace sensirion::upt::core
