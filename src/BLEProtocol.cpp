@@ -509,6 +509,69 @@ const SampleConfigMapping &GetSampleConfigurationMapping() {
                  .offset = 6,
                  .encodingFunction = &encodeSimple,
                  .decodingFunction = &decodeSimple}}}}},
+        {T_RH_PM25,
+         {.dataType = DataType::T_RH_PM25,
+          .downloadType = 41,
+          .sampleType = 42,
+          .sampleSizeBytes = 6,
+          .sampleCountPerPacket = 2,
+          .sensirionAdvertisementSampleType = 0,
+          .sampleSlots =
+              {{SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                {.signalType = SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                 .offset = 0,
+                 .encodingFunction = &encodeTemperatureV1,
+                 .decodingFunction = &decodeTemperatureV1}},
+               {SignalType::RELATIVE_HUMIDITY_PERCENTAGE,
+                {.signalType = SignalType::RELATIVE_HUMIDITY_PERCENTAGE,
+                 .offset = 2,
+                 .encodingFunction = &encodeHumidityV1,
+                 .decodingFunction = &decodeHumidityV1}},
+               {SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER,
+                {.signalType = SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER,
+                 .offset = 4,
+                 .encodingFunction = &encodePM2p5V1,
+                 .decodingFunction = &decodePM2p5V1}}}}},
+        {T_RH_HCHO_VOC_NOX_PM25,
+         {.dataType = DataType::T_RH_HCHO_VOC_NOX_PM25,
+          .downloadType = 43,
+          .sampleType = 44,
+          .sampleSizeBytes = 12,
+          .sampleCountPerPacket = 2,
+          .sensirionAdvertisementSampleType = 0,
+          .sampleSlots =
+              {
+                  {SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                   {.signalType = SignalType::TEMPERATURE_DEGREES_CELSIUS,
+                    .offset = 0,
+                    .encodingFunction = &encodeTemperatureV1,
+                    .decodingFunction = &decodeTemperatureV1}},
+                  {SignalType::RELATIVE_HUMIDITY_PERCENTAGE,
+                   {.signalType = SignalType::RELATIVE_HUMIDITY_PERCENTAGE,
+                    .offset = 2,
+                    .encodingFunction = &encodeHumidityV1,
+                    .decodingFunction = &decodeHumidityV1}},
+                  {SignalType::HCHO_PARTS_PER_BILLION,
+                   {.signalType = SignalType::HCHO_PARTS_PER_BILLION,
+                    .offset = 4,
+                    .encodingFunction = &encodeHCHOV1,
+                    .decodingFunction = &decodeHCHOV1}},
+                  {SignalType::VOC_INDEX,
+                   {.signalType = SignalType::VOC_INDEX,
+                    .offset = 6,
+                    .encodingFunction = &encodeSimple,
+                    .decodingFunction = &decodeSimple}},
+                  {SignalType::NOX_INDEX,
+                   {.signalType = SignalType::NOX_INDEX,
+                    .offset = 8,
+                    .encodingFunction = &encodeSimple,
+                    .decodingFunction = &decodeSimple}},
+                  {SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER,
+                   {.signalType = SignalType::PM2P5_MICRO_GRAMM_PER_CUBIC_METER,
+                    .offset = 10,
+                    .encodingFunction = &encodePM2p5V1,
+                    .decodingFunction = &decodePM2p5V1}},
+              }}},
         /* Add new SampleConfigs here */
     };
     return sampleConfigMapping;
@@ -517,7 +580,7 @@ const SampleConfigMapping &GetSampleConfigurationMapping() {
 SampleConfig GetSampleConfiguration(const DataType dataType) {
 
     auto mapping = GetSampleConfigurationMapping();
-    auto it = mapping.find(dataType);
+    const auto it = mapping.find(dataType);
     if (it == mapping.end()) {
         return SampleConfig{};
     }

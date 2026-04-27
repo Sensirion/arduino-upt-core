@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [1.3.0] - 2026-04-27
+
+### Added
+- Support for all SEN6x variants
+- Add T_RH_PM25 data type for e.g. SEN62
+- Add T_RH_HCHO_VOC_NOX_PM25 data type for e.g. SEN68
+
 ## [1.2.0] - 2025-12-12
 ### Fixed
 - Use generic H2 concentration encoding/decoding functions
