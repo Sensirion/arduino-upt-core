@@ -27,6 +27,7 @@ enum DataType {
     T_RH_V4,
     T_RH_VOC,
     T_RH_CO2,
+    T_RH_PM25,
     T_RH_CO2_ALT,
     T_RH_CO2_PM25,
     T_RH_VOC_PM25,
@@ -42,6 +43,7 @@ enum DataType {
     PM10_PM25_PM40_PM100,
     CO2_DataType,
     AV_T,
+    T_RH_HCHO_VOC_NOX_PM25
     /* Add new DataType here. Remember to add corresponding
      * SampleConfig in BLEProtocol.cpp */
 };
